@@ -48,7 +48,7 @@
                                                         <constraint firstAttribute="height" constant="44" id="ezD-gb-cyd"/>
                                                     </constraints>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="No Active">
+                                                    <state key="normal" image="NoActive">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="titleShadowColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="0.10231270695364239" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -110,6 +110,6 @@
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
-        <image name="No Active" width="42" height="42"/>
+        <image name="NoActive" width="42" height="42"/>
     </resources>
 </document>
