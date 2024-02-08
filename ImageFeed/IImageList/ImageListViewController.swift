@@ -3,6 +3,8 @@ import UIKit
 
 class ImageListViewController: UIViewController {
     
+    let snowView = SnowView()
+    
     @IBOutlet private var tableView: UITableView!
     
     private lazy var dateFormatter: DateFormatter = {
@@ -14,7 +16,16 @@ class ImageListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.addSubview(snowView)
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Устанавливаем размеры snowView равными размерам представления
+        snowView.frame = tableView.bounds
+        // Вызываем setupSnowfall после установки размеров
+        snowView.setupSnowfall()
     }
     
     func configCell(for cell: ImageListCell, with indexPath: IndexPath){
