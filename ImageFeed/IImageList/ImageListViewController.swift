@@ -16,15 +16,11 @@ class ImageListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.addSubview(snowView)
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        // Устанавливаем размеры snowView равными размерам представления
-        snowView.frame = tableView.bounds
-        // Вызываем setupSnowfall после установки размеров
         snowView.setupSnowfall()
     }
     
@@ -60,6 +56,8 @@ extension ImageListViewController: UITableViewDataSource {
         }
         configCell(for: imageListCell, with: indexPath)
         addGradient(to: imageListCell)
+        
+      
         return imageListCell
     }
     
