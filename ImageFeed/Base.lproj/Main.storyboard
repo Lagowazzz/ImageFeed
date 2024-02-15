@@ -107,9 +107,102 @@
             </objects>
             <point key="canvasLocation" x="-28.244274809160306" y="-27.464788732394368"/>
         </scene>
+        <!--ProfileViewController-->
+        <scene sceneID="v8V-aO-kfy">
+            <objects>
+                <viewController id="phI-m0-FJC" userLabel="ProfileViewController" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yl0-Al-qiG">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Photo" translatesAutoresizingMaskIntoConstraints="NO" id="JUe-AZ-KLT" userLabel="Avatar Image View">
+                                <rect key="frame" x="16" y="52" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="1cb-ZG-eZB"/>
+                                    <constraint firstAttribute="height" constant="70" id="AWb-3l-Y7t"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="35"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Екатерина Новикова" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Va-nf-Ndk" userLabel="Name Label">
+                                <rect key="frame" x="16" y="130" width="382" height="27.666666666666657"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ekaterina_nov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J0M-Rc-8R0" userLabel="Login Name Label">
+                                <rect key="frame" x="16" y="165.66666666666666" width="97" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="8WG-ZM-6sb"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="89" id="F8b-AC-r9Y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.68235294117647061" green="0.68627450980392157" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, world!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0P-PH-Rzg" userLabel="Description Label">
+                                <rect key="frame" x="16" y="191.66666666666666" width="75.666666666666671" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="67" id="4eK-LT-5PB"/>
+                                    <constraint firstAttribute="height" constant="18" id="w1G-UK-WQ5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMB-X3-dNS" userLabel="Logout Button">
+                                <rect key="frame" x="329" y="75" width="48" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="evT-om-hzM"/>
+                                    <constraint firstAttribute="height" constant="24" id="kVz-FD-QYm"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Exit"/>
+                                <connections>
+                                    <action selector="didTapLogoutButton:" destination="phI-m0-FJC" eventType="touchUpInside" id="96u-nf-w0g"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="G3h-92-3fs"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="hMB-X3-dNS" secondAttribute="trailing" constant="16" id="2Fh-9x-Ght"/>
+                            <constraint firstItem="1Va-nf-Ndk" firstAttribute="top" secondItem="JUe-AZ-KLT" secondAttribute="bottom" constant="8" id="8Aa-1R-Rd4"/>
+                            <constraint firstItem="hMB-X3-dNS" firstAttribute="top" secondItem="Yl0-Al-qiG" secondAttribute="top" constant="75" id="9ai-r7-49U"/>
+                            <constraint firstItem="1Va-nf-Ndk" firstAttribute="leading" secondItem="J0M-Rc-8R0" secondAttribute="leading" id="B9f-Ul-q2f"/>
+                            <constraint firstItem="J0M-Rc-8R0" firstAttribute="leading" secondItem="Yl0-Al-qiG" secondAttribute="leading" constant="16" id="OIv-Ly-UqO"/>
+                            <constraint firstItem="x0P-PH-Rzg" firstAttribute="leading" secondItem="Yl0-Al-qiG" secondAttribute="leading" constant="16" id="Oga-fV-if2"/>
+                            <constraint firstItem="G3h-92-3fs" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="J0M-Rc-8R0" secondAttribute="trailing" symbolic="YES" id="U9C-te-Brb"/>
+                            <constraint firstItem="x0P-PH-Rzg" firstAttribute="top" secondItem="J0M-Rc-8R0" secondAttribute="bottom" constant="8" id="fiE-I1-lIf"/>
+                            <constraint firstItem="G3h-92-3fs" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="x0P-PH-Rzg" secondAttribute="trailing" symbolic="YES" id="gH1-Ec-Sjk"/>
+                            <constraint firstItem="JUe-AZ-KLT" firstAttribute="leading" secondItem="Yl0-Al-qiG" secondAttribute="leading" constant="16" id="hRf-zm-m6i"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1Va-nf-Ndk" secondAttribute="trailing" constant="-21" id="lUg-ai-hBt"/>
+                            <constraint firstItem="hMB-X3-dNS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JUe-AZ-KLT" secondAttribute="trailing" constant="8" symbolic="YES" id="p8U-Mo-w3a"/>
+                            <constraint firstItem="J0M-Rc-8R0" firstAttribute="top" secondItem="1Va-nf-Ndk" secondAttribute="bottom" constant="8" id="rcG-hM-eCM"/>
+                            <constraint firstItem="JUe-AZ-KLT" firstAttribute="top" secondItem="Yl0-Al-qiG" secondAttribute="top" constant="52" id="s8e-Gv-bx1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="avatarImageButton" destination="JUe-AZ-KLT" id="Ayx-XW-uZb"/>
+                        <outlet property="descriptionLabel" destination="x0P-PH-Rzg" id="hS5-as-9FS"/>
+                        <outlet property="loginNameLabel" destination="J0M-Rc-8R0" id="tej-4j-4fZ"/>
+                        <outlet property="logoutButton" destination="hMB-X3-dNS" id="TII-V0-RMH"/>
+                        <outlet property="nameLabel" destination="1Va-nf-Ndk" id="puZ-B4-2nf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Rk-kg-yqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="687.78625954198469" y="-71.126760563380287"/>
+        </scene>
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
+        <image name="Exit" width="24" height="24"/>
         <image name="NoActive" width="42" height="42"/>
+        <image name="Photo" width="70" height="70"/>
     </resources>
 </document>
