@@ -53,7 +53,7 @@ class SnowView: UIView {
         snowflakeTwo.emissionRange = .pi
         snowflakeTwo.spin = 1
         snowflakeTwo.spinRange = 1.0
-        snowflake.scale = CGFloat.random(in: 0.5...2)
+        snowflakeTwo.scale = CGFloat.random(in: 0.5...2)
         snowflakeTwo.contents = UIImage(named: "NoActive")?.cgImage
         snowflakeTwo.color = UIColor.white.withAlphaComponent(0.5).cgColor
 
