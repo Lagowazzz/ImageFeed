@@ -122,12 +122,27 @@
                                 <rect key="frame" x="16" y="0.0" width="361" height="852"/>
                                 <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Afo-jx-f2H" userLabel="Back Button">
+                                <rect key="frame" x="9" y="55" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="O2M-XC-1WQ"/>
+                                    <constraint firstAttribute="height" constant="24" id="Wv1-Ab-Y9q"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Backward"/>
+                                <connections>
+                                    <action selector="didTapBackButton" destination="zsE-Qg-dgU" eventType="touchUpInside" id="SZH-jI-Xtg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wu5-w9-5sG"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottomMargin" secondItem="RpA-RM-XMY" secondAttribute="bottom" id="3iN-dq-rl8"/>
+                            <constraint firstItem="wu5-w9-5sG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Afo-jx-f2H" secondAttribute="trailing" symbolic="YES" id="4dp-CK-rZb"/>
+                            <constraint firstItem="Afo-jx-f2H" firstAttribute="leading" secondItem="6Dm-2q-NZl" secondAttribute="leading" constant="9" id="Vyo-fh-1j9"/>
                             <constraint firstItem="RpA-RM-XMY" firstAttribute="leading" secondItem="6Dm-2q-NZl" secondAttribute="leadingMargin" id="Xfv-fA-yqy"/>
+                            <constraint firstItem="Afo-jx-f2H" firstAttribute="top" secondItem="6Dm-2q-NZl" secondAttribute="top" constant="55" id="f6h-Gx-wWz"/>
                             <constraint firstItem="RpA-RM-XMY" firstAttribute="top" secondItem="6Dm-2q-NZl" secondAttribute="topMargin" id="hcQ-9Q-4Wq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RpA-RM-XMY" secondAttribute="trailing" id="hrC-RU-g9C"/>
                             <constraint firstItem="RpA-RM-XMY" firstAttribute="leading" secondItem="6Dm-2q-NZl" secondAttribute="leadingMargin" id="w9M-dH-BqA"/>
@@ -261,6 +276,7 @@
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
+        <image name="Backward" width="24" height="24"/>
         <image name="Exit" width="24" height="24"/>
         <image name="NoActive" width="42" height="42"/>
         <image name="Photo" width="70" height="70"/>
