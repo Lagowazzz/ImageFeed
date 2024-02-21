@@ -141,24 +141,42 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="T0g-wS-Jjk"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Fo4-VP-Yiu"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA6-nr-E8z">
+                                <rect key="frame" x="171" y="752" width="50" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="CVt-xb-h64"/>
+                                    <constraint firstAttribute="height" constant="50" id="KCs-1f-odg"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Sharing"/>
+                                <connections>
+                                    <action selector="didTapShareButton:" destination="zsE-Qg-dgU" eventType="touchUpInside" id="ae1-Fc-yVL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wu5-w9-5sG"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="wu5-w9-5sG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Afo-jx-f2H" secondAttribute="trailing" symbolic="YES" id="4dp-CK-rZb"/>
+                            <constraint firstAttribute="bottom" secondItem="AA6-nr-E8z" secondAttribute="bottom" constant="50" id="DPz-gB-Kdh"/>
+                            <constraint firstItem="wu5-w9-5sG" firstAttribute="trailing" secondItem="AA6-nr-E8z" secondAttribute="trailing" constant="172" id="HXJ-Ji-JC8"/>
                             <constraint firstItem="Afo-jx-f2H" firstAttribute="leading" secondItem="6Dm-2q-NZl" secondAttribute="leading" constant="9" id="Vyo-fh-1j9"/>
                             <constraint firstItem="Afo-jx-f2H" firstAttribute="top" secondItem="6Dm-2q-NZl" secondAttribute="top" constant="55" id="f6h-Gx-wWz"/>
+                            <constraint firstItem="AA6-nr-E8z" firstAttribute="leading" secondItem="wu5-w9-5sG" secondAttribute="leading" constant="171" id="kjz-sI-Ibc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="59N-gf-fXi"/>
                     <connections>
                         <outlet property="backButton" destination="Afo-jx-f2H" id="PhH-eO-lCj"/>
                         <outlet property="imageView" destination="RpA-RM-XMY" id="J6r-aL-Chs"/>
+                        <outlet property="sharingButton" destination="AA6-nr-E8z" id="6vE-fB-X9S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufP-dr-Q5B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2285" y="-668"/>
+            <point key="canvasLocation" x="2284.7328244274809" y="-668.30985915492965"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="w4R-Qe-yDv">
@@ -283,6 +301,7 @@
         <image name="Exit" width="24" height="24"/>
         <image name="NoActive" width="42" height="42"/>
         <image name="Photo" width="70" height="70"/>
+        <image name="Sharing" width="51" height="51"/>
         <image name="tab_editorial_active" width="21" height="22"/>
         <image name="tab_profile_active" width="31" height="30"/>
     </resources>
