@@ -2,22 +2,22 @@
 import UIKit
 
 class ImageListViewController: UIViewController {
-    
-    private  let showSingleImageSegueIdentifier = "ShowSingleImage"
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-    }
-    
+
     @IBOutlet private var tableView: UITableView!
-    
+  
+    private  let showSingleImageSegueIdentifier = "ShowSingleImage"
+  
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .none
         return formatter
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+    }
     
     func configCell(for cell: ImageListCell, with indexPath: IndexPath){
         guard let image = UIImage(named: photosName[indexPath.row]) else {
