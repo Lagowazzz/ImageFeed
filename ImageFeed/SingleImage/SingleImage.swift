@@ -33,7 +33,6 @@ final class SingleImageViewController: UIViewController {
     
     var imageScrollView: ImageScrollView!
     
-    
     @IBOutlet private  var imageView: UIImageView!
     
     func setupImageScrollView() {

@@ -4,7 +4,6 @@ import UIKit
 class ImageListViewController: UIViewController {
     
     private  let showSingleImageSegueIdentifier = "ShowSingleImage"
-
     
     override func viewDidLoad() {
         super.viewDidLoad()

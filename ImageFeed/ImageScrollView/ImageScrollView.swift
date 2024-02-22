@@ -1,6 +1,5 @@
 import UIKit
 
-
 class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     var imageView: UIImageView!
     var imageZoomView: UIImageView!
@@ -93,7 +92,6 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         self.maximumZoomScale = maxScale
     }
     
-    
     func centerImage() {
         let boundsSize = self.bounds.size
         var frameToCenter = imageView.frame
@@ -122,7 +120,6 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
             self.zoom(to: zoomRect, animated: true)
         }
     }
-    
     
     func zoom(point: CGPoint, animated: Bool) {
         let currentScale = self.zoomScale
