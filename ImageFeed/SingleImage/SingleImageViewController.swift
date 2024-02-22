@@ -16,26 +16,26 @@ final class SingleImageViewController: UIViewController {
     
     var image: UIImage?
     
-    @IBOutlet weak var sharingButton: UIButton!
+    @IBOutlet private weak var sharingButton: UIButton!
     
-    @IBAction func didTapShareButton(_ sender: Any) {
+    @IBAction private func didTapShareButton(_ sender: Any) {
         guard let image = image else { return }
         
         let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         
         present(activityViewController, animated: true, completion: nil)
     }
-    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet private weak var backButton: UIButton!
     
-    @IBAction func didTapBackButton(_ sender: UIButton) {
+    @IBAction private func didTapBackButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
-    var imageScrollView: ImageScrollView!
+    private var imageScrollView: ImageScrollView!
     
     @IBOutlet private  var imageView: UIImageView!
     
-    func setupImageScrollView() {
+    private func setupImageScrollView() {
         imageScrollView = ImageScrollView(frame: view.bounds)
         view.addSubview(imageScrollView)
         

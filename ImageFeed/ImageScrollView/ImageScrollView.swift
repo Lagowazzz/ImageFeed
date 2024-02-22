@@ -1,19 +1,19 @@
 import UIKit
 
-class ImageScrollView: UIScrollView, UIScrollViewDelegate {
+final class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     var imageView: UIImageView!
     var imageZoomView: UIImageView!
     
-    lazy var rotationGestureRecognizer: UIRotationGestureRecognizer = {
+    private lazy var rotationGestureRecognizer: UIRotationGestureRecognizer = {
         let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotationGesture(_:)))
         return rotationGesture
     }()
     
-    func rotateImage(by angle: CGFloat) {
+    private func rotateImage(by angle: CGFloat) {
         imageView.transform = imageView.transform.rotated(by: angle)
     }
     
-    @objc func handleRotationGesture(_ gesture: UIRotationGestureRecognizer) {
+    @objc private func handleRotationGesture(_ gesture: UIRotationGestureRecognizer) {
         switch gesture.state {
         case .began, .changed:
             rotateImage(by: gesture.rotation)
@@ -23,7 +23,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
-    lazy var zoomingTap: UITapGestureRecognizer = {
+    private lazy var zoomingTap: UITapGestureRecognizer = {
         let zoomingTap = UITapGestureRecognizer(target: self, action: #selector(handleZoomingTap))
         zoomingTap.numberOfTapsRequired = 2
         return zoomingTap
@@ -58,7 +58,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         self.centerImage()
     }
     
-    func configurateFor(imageSize: CGSize) {
+    private func configurateFor(imageSize: CGSize) {
         self.contentSize = imageSize
         
         setCurrentMaxAndMinZoomScale()
@@ -69,7 +69,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         self.maximumZoomScale = self.maximumZoomScale * 5.0
     }
     
-    func setCurrentMaxAndMinZoomScale() {
+    private func setCurrentMaxAndMinZoomScale() {
         let boundsSize = self.bounds.size
         let imageSize = imageView.bounds.size
         
@@ -92,7 +92,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         self.maximumZoomScale = maxScale
     }
     
-    func centerImage() {
+    private func centerImage() {
         let boundsSize = self.bounds.size
         var frameToCenter = imageView.frame
         
@@ -109,7 +109,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         imageView.frame = frameToCenter
     }
     
-    @objc func handleZoomingTap(sender: UITapGestureRecognizer) {
+    @objc private func handleZoomingTap(sender: UITapGestureRecognizer) {
         let location = sender.location(in: sender.view)
         
         if self.zoomScale == self.minimumZoomScale {
@@ -121,7 +121,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
-    func zoom(point: CGPoint, animated: Bool) {
+    private func zoom(point: CGPoint, animated: Bool) {
         let currentScale = self.zoomScale
         let minScale = self.minimumZoomScale
         let maxScale = self.maximumZoomScale
@@ -135,7 +135,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         self.zoom(to: zoomRect, animated: animated)
     }
     
-    func zoomRect(scale: CGFloat, center: CGPoint) -> CGRect {
+    private func zoomRect(scale: CGFloat, center: CGPoint) -> CGRect {
         var zoomRect = CGRect.zero
         let bounds = self.bounds
         
