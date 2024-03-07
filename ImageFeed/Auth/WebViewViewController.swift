@@ -1,6 +1,11 @@
 import UIKit
 import WebKit
 
+protocol WebViewViewControllerDelegate: AnyObject {
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
+    
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController)
+}
 
 enum WebViewConstants {
     static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
@@ -8,14 +13,12 @@ enum WebViewConstants {
 
 class WebViewViewController: UIViewController, WKNavigationDelegate {
     
+    weak var delegate: WebViewViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadAuthView()
         webView.navigationDelegate = self
-    }
-    
-    @IBAction func didTapBackToAuthButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
     }
     
     @IBOutlet weak var webView: WKWebView!
@@ -35,6 +38,30 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
         }
         let request = URLRequest(url: url)
         webView.load(request)
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let code = code(from: navigationAction) {
+            delegate?.webViewViewController(self, didAuthenticateWithCode: code)
+            decisionHandler(.cancel)
+        }
+        else {
+            decisionHandler(.allow)
+        }
+    }
+    
+    private func code(from navigationAction: WKNavigationAction) -> String? {
+        if
+            let url = navigationAction.request.url,
+            let urlComponents = URLComponents(string: url.absoluteString),
+            urlComponents.path == "/oauth/authorize/native",
+            let items = urlComponents.queryItems,
+            let codeItem = items.first(where: {$0.name == "code"})
+        {
+            return codeItem.value
+        } else {
+            return nil
+        }
     }
     
     
