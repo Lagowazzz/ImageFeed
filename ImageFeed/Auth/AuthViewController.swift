@@ -1,32 +1,35 @@
 import UIKit
-
+protocol AuthViewControllerDelegate: AnyObject {
+    func didAuthenticate(_ vc: AuthViewController, didAuthenticateWithCode code: String)
+}
 final class AuthViewController: UIViewController, WebViewViewControllerDelegate {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureBackButton()
-    }
+    weak var delegate: AuthViewControllerDelegate? 
+
+    private let oauth2Service = OAuth2Service.shared
+    private let splashViewController = SplashViewController()
     
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        
+        vc.dismiss(animated: true)
+        oauth2Service.fetchOAuthToken(code: code) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.delegate?.didAuthenticate(self, didAuthenticateWithCode: code)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
-    
+
+ 
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBOutlet weak var enterButton: UIButton!
 
-    
     private let showWebViewSegueIdentifier = "ShowWebView"
-    
-    private func configureBackButton() {
-        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "nav_back_button")
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "nav_back_button")
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = UIColor.black
-    }
-    
+  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showWebViewSegueIdentifier {
             guard
@@ -37,4 +40,5 @@ final class AuthViewController: UIViewController, WebViewViewControllerDelegate 
             super.prepare(for: segue, sender: sender)
         }
     }
+     
 }
