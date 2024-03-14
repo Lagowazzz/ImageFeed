@@ -1,6 +1,7 @@
 import UIKit
 
 final class SplashViewController: UIViewController, AuthViewControllerDelegate {
+    
     private let oauth2Service = OAuth2Service.shared
     private let storage = OAuth2TokenStorage()
 
@@ -27,8 +28,7 @@ final class SplashViewController: UIViewController, AuthViewControllerDelegate {
         }
     }
 
-
-    func switchToTabBarController() {
+    private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else {
             assertionFailure("Invalid window configuration")
             return
@@ -41,10 +41,7 @@ final class SplashViewController: UIViewController, AuthViewControllerDelegate {
     }
 
     func didAuthenticate(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
-            self.fetchOAuthToken(code)
-        }
+        fetchOAuthToken(code)
     }
 
     private func fetchOAuthToken(_ code: String) {
@@ -53,8 +50,8 @@ final class SplashViewController: UIViewController, AuthViewControllerDelegate {
             switch result {
             case .success:
                 self.switchToTabBarController()
-            case .failure:
-                break
+            case .failure(let error):
+                print("Error fetching OAuth token: \(error)")
             }
         }
     }
