@@ -9,9 +9,9 @@ final class OAuth2Service {
     func makeOAuthTokenRequest(code: String) -> URLRequest {
         guard let baseURL = URL(string: "https://unsplash.com") else { fatalError("Invalid Base URL") }
         guard let url = URL(string: "/oauth/token" +
-                            "?client_id=\(Constants.AccessKey)" +
-                            "&&client_secret=\(Constants.SecretKey)" +
-                            "&&redirect_uri=\(Constants.RedirectURI)" +
+                            "?client_id=\(Constants.accessKey)" +
+                            "&&client_secret=\(Constants.secretKey)" +
+                            "&&redirect_uri=\(Constants.redirectURI)" +
                             "&&code=\(code)" +
                             "&&grant_type=authorization_code", relativeTo: baseURL) else { fatalError("Invalid URL") }
         var request = URLRequest(url: url)
@@ -19,7 +19,7 @@ final class OAuth2Service {
         return request
     }
 
-    func fetchOAuthToken(code: String, completion: @escaping (Result<Data, Error>) -> Void) {
+    func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         let request = makeOAuthTokenRequest(code: code)
         let task = URLSession.shared.dataTask(with: request) { [self] data, response, error in
             DispatchQueue.main.async {
@@ -54,7 +54,7 @@ final class OAuth2Service {
                     let decoder = JSONDecoder()
                     let tokenResponse = try decoder.decode(OAuthTokenResponseBody.self, from: data)
                     self.tokenStorage.token = tokenResponse.accessToken
-                    completion(.success(data))
+                    completion(.success(tokenResponse.accessToken))
                 } catch let decodingError {
                     print("Decoding Error: \(decodingError)")
                     completion(.failure(decodingError))

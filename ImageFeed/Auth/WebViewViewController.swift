@@ -11,7 +11,7 @@ enum WebViewConstants {
     static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
 }
 
-class WebViewViewController: UIViewController, WKNavigationDelegate {
+final class WebViewViewController: UIViewController, WKNavigationDelegate {
 
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var webView: WKWebView!
@@ -41,10 +41,10 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
             return
         }
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: Constants.AccessKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.RedirectURI),
+            URLQueryItem(name: "client_id", value: Constants.accessKey),
+            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
             URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: Constants.AccessScope)
+            URLQueryItem(name: "scope", value: Constants.accessScope)
         ]
         guard  let url = urlComponents.url else {
             return
