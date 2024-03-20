@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		693D3F502B7FA23A0088EF12 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693D3F4F2B7FA23A0088EF12 /* SingleImageViewController.swift */; };
 		6942B5C72B85DD0E00BACFBD /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6942B5C62B85DD0E00BACFBD /* ImageScrollView.swift */; };
+		694474A72BAAFDA900F2252E /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694474A62BAAFDA900F2252E /* UIBlockingProgressHUD.swift */; };
 		694652EF2B93C00500924C62 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694652EE2B93C00500924C62 /* AuthViewController.swift */; };
 		694652F12B93C04A00924C62 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694652F02B93C04A00924C62 /* WebViewViewController.swift */; };
 		694652F42B93D85900924C62 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694652F32B93D85900924C62 /* Constants.swift */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		693D3F4F2B7FA23A0088EF12 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		6942B5C62B85DD0E00BACFBD /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
+		694474A62BAAFDA900F2252E /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		694652EE2B93C00500924C62 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		694652F02B93C04A00924C62 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		694652F32B93D85900924C62 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -75,6 +77,14 @@
 				6942B5C62B85DD0E00BACFBD /* ImageScrollView.swift */,
 			);
 			path = ImageScrollView;
+			sourceTree = "<group>";
+		};
+		694474A52BAAFD9600F2252E /* UIBlockingProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				694474A62BAAFDA900F2252E /* UIBlockingProgressHUD.swift */,
+			);
+			path = UIBlockingProgressHUD;
 			sourceTree = "<group>";
 		};
 		694652ED2B93BFE300924C62 /* Auth */ = {
@@ -134,6 +144,7 @@
 		69C3C8452B6F044200E1EC3A /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				694474A52BAAFD9600F2252E /* UIBlockingProgressHUD */,
 				694652F22B93D83D00924C62 /* Constants */,
 				694652ED2B93BFE300924C62 /* Auth */,
 				6942B5C52B85DCD500BACFBD /* ImageScrollView */,
@@ -235,6 +246,7 @@
 				69D54E6C2BA04C8A00743287 /* SplashViewController.swift in Sources */,
 				694652EF2B93C00500924C62 /* AuthViewController.swift in Sources */,
 				69D54E662B9E0C4300743287 /* OAuth2Service.swift in Sources */,
+				694474A72BAAFDA900F2252E /* UIBlockingProgressHUD.swift in Sources */,
 				694652F42B93D85900924C62 /* Constants.swift in Sources */,
 				699AF7742B7E8E7600C6B3CB /* ProfileViewController.swift in Sources */,
 				69C3C8472B6F044200E1EC3A /* AppDelegate.swift in Sources */,

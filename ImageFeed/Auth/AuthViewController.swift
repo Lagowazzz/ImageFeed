@@ -27,16 +27,16 @@ final class AuthViewController: UIViewController, WebViewViewControllerDelegate 
 
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         didAuthenticateWithCode(code)
+        UIBlockingProgressHUD.show()
     }
 
     private func didAuthenticateWithCode(_ code: String) {
-        ProgressHUD.animate()
         oauth2Service.fetchOAuthToken(code: code) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
-                ProgressHUD.dismiss()
                 self.switchToTabBarController()
+                UIBlockingProgressHUD.dismiss()
             case .failure(let error):
                 print("Error fetching OAuth token: \(error)")
             }

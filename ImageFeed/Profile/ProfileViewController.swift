@@ -61,6 +61,12 @@ final class ProfileViewController: UIViewController {
         button.tintColor = .red
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
+        button.addTarget(self, action: #selector(deleteToken), for: .touchUpInside)
+    }
+    
+    @objc func deleteToken() {
+        let tokenStorage = OAuth2TokenStorage()
+        tokenStorage.token = nil
     }
     
     private func setupConstraints() {
