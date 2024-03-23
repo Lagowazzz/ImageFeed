@@ -12,4 +12,3 @@ final class OAuth2TokenStorage {
         }
     }
 }
-

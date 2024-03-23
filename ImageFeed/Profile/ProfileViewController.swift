@@ -7,11 +7,13 @@ final class ProfileViewController: UIViewController {
     private let labelSecond = UILabel()
     private let labelThird = UILabel()
     private let button = UIButton()
+    private let profileService = ProfileService.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        updateProfileDetails(profile: profileService.profile)
     }
     
     private func setupUI() {
@@ -94,4 +96,12 @@ final class ProfileViewController: UIViewController {
             button.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
         ])
     }
+    
+    private func updateProfileDetails(profile: Profile?) {
+        label.text = profile?.name
+        labelSecond.text = profile?.loginName
+        labelThird.text = profile?.bio
+    }
 }
+
+
