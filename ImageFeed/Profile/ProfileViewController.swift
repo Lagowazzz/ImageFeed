@@ -38,7 +38,6 @@ final class ProfileViewController: UIViewController {
             )
         }
     }
-
     
     private func setupUI() {
         setupImageView()
@@ -57,7 +56,6 @@ final class ProfileViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
     }
-
     
     private func setupLabel() {
         label.text = "Екатерина Новикова"
@@ -100,25 +98,21 @@ final class ProfileViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            // Constraints for imageView
+
             imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             imageView.widthAnchor.constraint(equalToConstant: 70),
             imageView.heightAnchor.constraint(equalToConstant: 70),
             
-            // Constraints for label
             label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
             
-            // Constraints for second label
             labelSecond.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             labelSecond.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
             
-            // Constraints for third label
             labelThird.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             labelThird.topAnchor.constraint(equalTo: labelSecond.bottomAnchor, constant: 8),
             
-            // Constraints for button
             button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
             button.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
         ])
@@ -130,6 +124,4 @@ final class ProfileViewController: UIViewController {
         labelThird.text = profile?.bio
     }
 }
-
-
 

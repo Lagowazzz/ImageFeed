@@ -31,7 +31,7 @@ final class AuthViewController: UIViewController, WebViewViewControllerDelegate 
             self.didAuthenticateWithCode(code)
         }
     }
-
+    
     private func didAuthenticateWithCode(_ code: String) {
         oauth2Service.fetchOAuthToken(code: code) { [weak self] result in
             guard let self = self else { return }
@@ -47,7 +47,7 @@ final class AuthViewController: UIViewController, WebViewViewControllerDelegate 
             }
         }
     }
-
+    
     
     private func switchToTabBarController() {
         DispatchQueue.main.async { [weak self] in
@@ -63,8 +63,6 @@ final class AuthViewController: UIViewController, WebViewViewControllerDelegate 
             window.rootViewController = tabBarController
         }
     }
-
-
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true, completion: nil)

@@ -11,6 +11,7 @@ final class OAuth2Service {
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     private var lastCode: String?
+    private let lock = NSLock()
     
     static let shared = OAuth2Service()
     private let tokenStorage = OAuth2TokenStorage()
@@ -30,43 +31,44 @@ final class OAuth2Service {
     }
 
     func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
-        assert(Thread.isMainThread)
+        lock.lock()
+        defer { lock.unlock() }
+        
         if task != nil {
             if lastCode != code {
                 task?.cancel()
             } else {
-                let error = NSError(domain: "Invalid request", code: -1, userInfo: nil)
-                print("[OAuth2Service]: Invalid request error")
-                completion(.failure(error))
-                return
-            }
-        } else {
-            if lastCode == code {
-                let error = NSError(domain: "Invalid request", code: -1, userInfo: nil)
+                let error = AuthServiceError.invalidRequest
                 print("[OAuth2Service]: Invalid request error")
                 completion(.failure(error))
                 return
             }
         }
+        
         lastCode = code
         guard let request = makeOAuthTokenRequest(code: code) else {
-            let error = NSError(domain: "Invalid request", code: -1, userInfo: nil)
+            let error = AuthServiceError.invalidRequest
             print("[OAuth2Service]: Invalid request error")
             completion(.failure(error))
             return
         }
         
-        let task = URLSession.shared.objectTask(for: request) { (result: Result<OAuthTokenResponseBody, Error>) in
-            switch result {
-            case .success(let tokenResponse):
-                self.tokenStorage.token = tokenResponse.accessToken
-                completion(.success(tokenResponse.accessToken))
-            case .failure(let error):
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
                 print("[OAuth2Service]: \(error.localizedDescription)")
                 completion(.failure(error))
+                return
             }
-            self.task = nil
-            self.lastCode = nil
+            
+            if let data = data,
+               let tokenResponse = try? JSONDecoder().decode(OAuthTokenResponseBody.self, from: data) {
+                self.tokenStorage.token = tokenResponse.accessToken
+                completion(.success(tokenResponse.accessToken))
+            } else {
+                let error = AuthServiceError.invalidRequest
+                print("[OAuth2Service]: Invalid request error")
+                completion(.failure(error))
+            }
         }
         self.task = task
         task.resume()
