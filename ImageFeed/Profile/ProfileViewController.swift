@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
@@ -8,13 +9,36 @@ final class ProfileViewController: UIViewController {
     private let labelThird = UILabel()
     private let button = UIButton()
     private let profileService = ProfileService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
         updateProfileDetails(profile: profileService.profile)
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(forName: ProfileImageService.didChangeNotification, object: nil,
+                         queue: .main) { [weak self] _ in
+                guard let self = self else { return }
+                self.updateAvatar()
+            }
+        updateAvatar()
     }
+    
+    private func updateAvatar() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            guard let profileImageURL = ProfileImageService.shared.avatarURL,
+                  let url = URL(string: profileImageURL) else { return }
+            let processor = RoundCornerImageProcessor(cornerRadius: 35)
+            self.imageView.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "Stub"),
+                options: [.processor(processor)]
+            )
+        }
+    }
+
     
     private func setupUI() {
         setupImageView()
@@ -28,9 +52,12 @@ final class ProfileViewController: UIViewController {
         let profileImage = UIImage(named: "Photo")
         imageView.image = profileImage
         imageView.tintColor = .gray
+        imageView.layer.cornerRadius = 35
+        imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
     }
+
     
     private func setupLabel() {
         label.text = "Екатерина Новикова"
@@ -103,5 +130,6 @@ final class ProfileViewController: UIViewController {
         labelThird.text = profile?.bio
     }
 }
+
 
 

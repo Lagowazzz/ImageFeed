@@ -19,40 +19,24 @@ final class ProfileService {
         isFetchingProfile = true
         
         guard let request = makeUserProfileRequest(token: token) else {
-            completion(.failure(ProfileServiceError.invalidRequest))
+            let error = NSError(domain: "Invalid request", code: -1, userInfo: nil)
+            print("[ProfileService]: Invalid request error")
+            completion(.failure(error))
             isFetchingProfile = false
             return
         }
         
-        let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
-            guard let self = self else { return }
-            defer {
-                self.isFetchingProfile = false
-            }
-            
-            if let error = error {
+        let task = URLSession.shared.objectTask(for: request) { (result: Result<ProfileResult, Error>) in
+            switch result {
+            case .success(let profileResult):
+                let profile = Profile(from: profileResult)
+                self.profile = profile
+                completion(.success(profile))
+            case .failure(let error):
+                print("[ProfileService]: \(error.localizedDescription)")
                 completion(.failure(error))
-                return
             }
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                completion(.failure(ProfileServiceError.invalidResponse))
-                return
-            }
-            
-            if let data = data {
-                do {
-                    let decoder = JSONDecoder()
-                    let profileResult = try decoder.decode(ProfileResult.self, from: data)
-                    let profile = Profile(from: profileResult)
-                    self.profile = profile
-                    completion(.success(profile))
-                } catch {
-                    completion(.failure(error))
-                }
-            } else {
-                completion(.failure(ProfileServiceError.invalidData))
-            }
+            self.isFetchingProfile = false
         }
         
         task.resume()
@@ -62,7 +46,7 @@ final class ProfileService {
         let endpoint = "/me"
         let urlString = unsplashAPIBaseURL + endpoint
         guard let url = URL(string: urlString) else {
-            print("Invalid URL.")
+            print("[ProfileService]: Invalid URL")
             return nil
         }
         
@@ -73,6 +57,7 @@ final class ProfileService {
         return request
     }
 }
+
 
 enum ProfileServiceError: Error {
     case invalidRequest

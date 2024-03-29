@@ -4,6 +4,8 @@ enum AuthServiceError: Error {
     case invalidRequest
 }
 
+import Foundation
+
 final class OAuth2Service {
     
     private let urlSession = URLSession.shared
@@ -33,64 +35,38 @@ final class OAuth2Service {
             if lastCode != code {
                 task?.cancel()
             } else {
-                completion(.failure(AuthServiceError.invalidRequest))
+                let error = NSError(domain: "Invalid request", code: -1, userInfo: nil)
+                print("[OAuth2Service]: Invalid request error")
+                completion(.failure(error))
                 return
             }
         } else {
             if lastCode == code {
-                completion(.failure(AuthServiceError.invalidRequest))
+                let error = NSError(domain: "Invalid request", code: -1, userInfo: nil)
+                print("[OAuth2Service]: Invalid request error")
+                completion(.failure(error))
                 return
             }
         }
         lastCode = code
-        guard
-            let request = makeOAuthTokenRequest(code: code)
-        else { completion(.failure(AuthServiceError.invalidRequest))
+        guard let request = makeOAuthTokenRequest(code: code) else {
+            let error = NSError(domain: "Invalid request", code: -1, userInfo: nil)
+            print("[OAuth2Service]: Invalid request error")
+            completion(.failure(error))
             return
         }
-        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    print("Network error: \(error)")
-                    completion(.failure(error))
-                    return
-                }
-
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    let unknownError = NSError(domain: "OAuth2Service", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown response from server"])
-                    print("Unknown response from server")
-                    completion(.failure(unknownError))
-                    return
-                }
-
-                guard (200..<300).contains(httpResponse.statusCode) else {
-                    let statusCodeError = NSError(domain: "OAuth2Service", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "HTTP status code \(httpResponse.statusCode)"])
-                    print("Unsuccessful response from server: \(httpResponse.statusCode)")
-                    completion(.failure(statusCodeError))
-                    return
-                }
-
-                guard let data = data else {
-                    let missingDataError = NSError(domain: "OAuth2Service", code: -1, userInfo: [NSLocalizedDescriptionKey: "Missing data in response"])
-                    print("Missing data in response")
-                    completion(.failure(missingDataError))
-                    return
-                }
-
-                do {
-                    let decoder = JSONDecoder()
-                    let tokenResponse = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                    self?.tokenStorage.token = tokenResponse.accessToken
-                    completion(.success(tokenResponse.accessToken))
-                    
-                } catch let decodingError {
-                    print("Decoding Error: \(decodingError)")
-                    completion(.failure(decodingError))
-                    
-                }
-                self?.task = nil
-                self?.lastCode = nil
+        
+        let task = URLSession.shared.objectTask(for: request) { (result: Result<OAuthTokenResponseBody, Error>) in
+            switch result {
+            case .success(let tokenResponse):
+                self.tokenStorage.token = tokenResponse.accessToken
+                completion(.success(tokenResponse.accessToken))
+            case .failure(let error):
+                print("[OAuth2Service]: \(error.localizedDescription)")
+                completion(.failure(error))
             }
+            self.task = nil
+            self.lastCode = nil
         }
         self.task = task
         task.resume()
