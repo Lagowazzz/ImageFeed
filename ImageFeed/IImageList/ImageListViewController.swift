@@ -31,8 +31,10 @@ class ImageListViewController: UIViewController {
         cell.likeButton.setImage(likeImage, for: .normal)
     }
     
-    private let photosName: [String] = Array(0..<20).map{"\($0)"}
-    
+    private let photosName: [String] = {
+        return Array(0..<20).map{"\($0)"}
+    }()
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showSingleImageSegueIdentifier {
             guard
