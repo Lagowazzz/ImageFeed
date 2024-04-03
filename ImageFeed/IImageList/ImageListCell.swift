@@ -1,5 +1,4 @@
 import UIKit
-import Foundation
 
 final class ImageListCell: UITableViewCell {
     
@@ -8,4 +7,10 @@ final class ImageListCell: UITableViewCell {
     @IBOutlet weak var imageViewCell: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageViewCell.kf.cancelDownloadTask()
+        imageViewCell.image = nil
+    }
 }

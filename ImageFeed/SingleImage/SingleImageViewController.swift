@@ -8,7 +8,7 @@ final class SingleImageViewController: UIViewController {
         setupImageScrollView()
         imageView.image = image
         if let image = image {
-        imageScrollView.set(image: image)
+            imageScrollView.set(image: image)
         }
         view.bringSubviewToFront(backButton)
         view.bringSubviewToFront(sharingButton)

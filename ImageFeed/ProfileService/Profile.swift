@@ -6,7 +6,7 @@ struct Profile {
     let name: String
     let loginName: String
     let bio: String?
-
+    
     init(from profileResult: ProfileResult) {
         username = profileResult.username
         let firstName = profileResult.firstName

@@ -48,7 +48,7 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setupImageView() {
-        let profileImage = UIImage(named: "Photo")
+        let profileImage = UIImage(named: "Stub")
         imageView.image = profileImage
         imageView.tintColor = .gray
         imageView.layer.cornerRadius = 35
@@ -98,7 +98,7 @@ final class ProfileViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-
+            
             imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             imageView.widthAnchor.constraint(equalToConstant: 70),
