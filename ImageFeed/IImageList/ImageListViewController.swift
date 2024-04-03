@@ -1,10 +1,12 @@
 import UIKit
 import Kingfisher
 
-class ImageListViewController: UIViewController {
+class ImageListViewController: UIViewController, ImageListCellDelegate {
+  
+    
     
     @IBOutlet private var tableView: UITableView!
-    
+    var photos: [Photo] = []
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     private let imagesListService = ImagesListService()
     private lazy var dateFormatter: DateFormatter = {
@@ -92,7 +94,7 @@ extension ImageListViewController: UITableViewDataSource {
         }
         configCell(for: cell, with: indexPath)
         addGradient(to: cell)
-        
+        cell.delegate = self
         return cell
     }
     
@@ -129,4 +131,32 @@ extension ImageListViewController: UITableViewDataSource {
         tableView.insertRows(at: indexPaths, with: .automatic)
         tableView.endUpdates()
     }
+
+
+func imageListCellDidTapLike(_ cell: ImageListCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+    let photo = imagesListService.photos[indexPath.row]
+        
+        UIBlockingProgressHUD.show()
+        imagesListService.changeLike(photoId: photo.id, isLiked: !photo.isLiked) { result in
+            switch result {
+            case .success:
+                self.photos = self.imagesListService.photos
+                cell.setIsLiked(isLiked: self.photos[indexPath.row].isLiked)
+                UIBlockingProgressHUD.dismiss()
+            case .failure:
+                UIBlockingProgressHUD.dismiss()
+                self.presentErrorAlert()
+            }
+        }
+    }
+    
+    private func presentErrorAlert() {
+        let alertController = UIAlertController(title: "Что-то пошло не так(", message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ок", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }
+
+
