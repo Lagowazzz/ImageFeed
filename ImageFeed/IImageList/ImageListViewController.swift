@@ -37,6 +37,10 @@ class ImageListViewController: UIViewController, ImageListCellDelegate {
     
     func configCell(for cell: ImageListCell, with indexPath: IndexPath) {
         let photo = imagesListService.photos[indexPath.row]
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        dateFormatter.dateFormat = "d MMMM yyyy"
         cell.dateLabel.text = dateFormatter.string(from: photo.createdAt ?? Date())
         
         let isLiked = photo.isLiked

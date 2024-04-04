@@ -1,5 +1,4 @@
 
-
 import Foundation
 
 struct PhotoResult: Codable {
@@ -27,7 +26,8 @@ struct PhotoResult: Codable {
 extension PhotoResult {
     func toPhoto() -> Photo {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
         guard let date = dateFormatter.date(from: createdAt) else {
             return Photo(
@@ -36,7 +36,7 @@ extension PhotoResult {
                 createdAt: nil,
                 welcomeDescription: description,
                 thumdImageURL: urls.thumb.absoluteString,
-                largeImageURL: urls.full.absoluteString, 
+                largeImageURL: urls.full.absoluteString,
                 regularImageURL: urls.regular.absoluteString,
                 isLiked: likedByUser
             )
@@ -48,7 +48,7 @@ extension PhotoResult {
             createdAt: date,
             welcomeDescription: description,
             thumdImageURL: urls.thumb.absoluteString,
-            largeImageURL: urls.full.absoluteString, 
+            largeImageURL: urls.full.absoluteString,
             regularImageURL: urls.regular.absoluteString,
             isLiked: likedByUser
         )

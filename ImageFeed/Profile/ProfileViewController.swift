@@ -89,7 +89,7 @@ final class ProfileViewController: UIViewController {
         button.tintColor = .red
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
-        button.addTarget(profileLogoutService, action: #selector(ProfileLogoutService.logout), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
     }
     
     private func setupConstraints() {
@@ -118,6 +118,21 @@ final class ProfileViewController: UIViewController {
         label.text = profile?.name
         labelSecond.text = profile?.loginName
         labelThird.text = profile?.bio
+    }
+    
+    @objc private func showAlert() {
+        let alertController = UIAlertController(title: "Пока, пока!", message: "Уверены что хотите выйти?", preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: "Да", style: .destructive) { _ in
+            self.profileLogoutService.logout()
+        }
+        
+        let noAction = UIAlertAction(title: "Нет", style: .cancel, handler: nil)
+        
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
 

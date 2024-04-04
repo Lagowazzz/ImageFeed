@@ -13,10 +13,10 @@ final class SingleImageViewController: UIViewController {
             return
         }
         print("Image size: \(photo.size)")
-
+        
         imageView.kf.indicatorType = .activity
         UIBlockingProgressHUD.show()
-        imageView.kf.setImage(with: fullImageUrl) { [weak self] result in
+        imageView.kf.setImage(with: fullImageUrl, placeholder: UIImage(named: "Stub2")) { [weak self] result in
             UIBlockingProgressHUD.dismiss()
             
             guard let self = self else { return }
