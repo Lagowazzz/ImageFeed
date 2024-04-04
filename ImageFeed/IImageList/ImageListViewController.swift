@@ -53,28 +53,28 @@ class ImageListViewController: UIViewController, ImageListCellDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showSingleImageSegueIdentifier {
-            guard
-                let viewController = segue.destination as? SingleImageViewController,
-                let indexPath = sender as? IndexPath,
-                let cell = tableView.cellForRow(at: indexPath) as? ImageListCell,
-                let image = cell.imageViewCell.image
-            else {
-                assertionFailure("Invalid Segue Destination")
-                return
+            if segue.identifier == showSingleImageSegueIdentifier {
+                guard
+                    let viewController = segue.destination as? SingleImageViewController,
+                    let photo = sender as? Photo
+                else {
+                    assertionFailure("Invalid Segue Destination")
+                    return
+                }
+                viewController.photo = photo
+            } else {
+                super.prepare(for: segue, sender: sender)
             }
-            viewController.image = image
-        } else {
-            super.prepare(for: segue, sender: sender)
         }
-    }
     
 }
 
 extension ImageListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
+        let photo = imagesListService.photos[indexPath.row]
+        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: photo)
     }
+
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == imagesListService.photos.count - 1, !imagesListService.isLoading {

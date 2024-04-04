@@ -3,13 +3,31 @@ import UIKit
 
 final class SingleImageViewController: UIViewController {
     
+    var photo: Photo?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImageScrollView()
-        imageView.image = image
-        if let image = image {
-            imageScrollView.set(image: image)
+        
+        guard let photo = photo, let fullImageUrl = URL(string: photo.largeImageURL) else {
+            return
         }
+        print("Image size: \(photo.size)")
+
+        imageView.kf.indicatorType = .activity
+        UIBlockingProgressHUD.show()
+        imageView.kf.setImage(with: fullImageUrl) { [weak self] result in
+            UIBlockingProgressHUD.dismiss()
+            
+            guard let self = self else { return }
+            switch result {
+            case .success(let imageResult):
+                self.imageScrollView.set(image: imageResult.image)
+            case .failure:
+                print("error")
+            }
+        }
+        
         view.bringSubviewToFront(backButton)
         view.bringSubviewToFront(sharingButton)
     }
@@ -49,4 +67,36 @@ final class SingleImageViewController: UIViewController {
     }
 }
 
+extension SingleImageViewController {
+    func showError() {
+        let alertController = UIAlertController(title: "Что-то пошло не так", message: "Попробовать ещё раз?", preferredStyle: .alert)
+        
+        let retryAction = UIAlertAction(title: "Повторить", style: .default) { [weak self] _ in
+            guard let self = self, let photo = self.photo, let fullImageUrl = URL(string: photo.largeImageURL) else {
+                return
+            }
+            
+            self.imageView.kf.indicatorType = .activity
+            UIBlockingProgressHUD.show()
+            self.imageView.kf.setImage(with: fullImageUrl) { [weak self] result in
+                UIBlockingProgressHUD.dismiss()
+                
+                guard let self = self else { return }
+                switch result {
+                case .success(let imageResult):
+                    self.imageScrollView.set(image: imageResult.image)
+                case .failure:
+                    self.showError()
+                }
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Не надо", style: .cancel, handler: nil)
+        
+        alertController.addAction(retryAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+}
 
