@@ -10,6 +10,7 @@ final class ProfileViewController: UIViewController {
     private let button = UIButton()
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
+    private let profileLogoutService = ProfileLogoutService.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,12 +89,7 @@ final class ProfileViewController: UIViewController {
         button.tintColor = .red
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
-        button.addTarget(self, action: #selector(deleteToken), for: .touchUpInside)
-    }
-    
-    @objc func deleteToken() {
-        let tokenStorage = OAuth2TokenStorage()
-        tokenStorage.token = nil
+        button.addTarget(profileLogoutService, action: #selector(ProfileLogoutService.logout), for: .touchUpInside)
     }
     
     private func setupConstraints() {

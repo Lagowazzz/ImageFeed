@@ -51,6 +51,10 @@ final class ImagesListService {
         task.resume()
     }
     
+    func clearPhotos() {
+        photos.removeAll()
+    }
+    
     func changeLike(photoId: String, isLiked: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
         print("Changing like for photoId: \(photoId)")
         

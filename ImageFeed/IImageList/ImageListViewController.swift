@@ -2,8 +2,6 @@ import UIKit
 import Kingfisher
 
 class ImageListViewController: UIViewController, ImageListCellDelegate {
-  
-    
     
     @IBOutlet private var tableView: UITableView!
     var photos: [Photo] = []
@@ -53,20 +51,19 @@ class ImageListViewController: UIViewController, ImageListCellDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == showSingleImageSegueIdentifier {
-                guard
-                    let viewController = segue.destination as? SingleImageViewController,
-                    let photo = sender as? Photo
-                else {
-                    assertionFailure("Invalid Segue Destination")
-                    return
-                }
-                viewController.photo = photo
-            } else {
-                super.prepare(for: segue, sender: sender)
+        if segue.identifier == showSingleImageSegueIdentifier {
+            guard
+                let viewController = segue.destination as? SingleImageViewController,
+                let photo = sender as? Photo
+            else {
+                assertionFailure("Invalid Segue Destination")
+                return
             }
+            viewController.photo = photo
+        } else {
+            super.prepare(for: segue, sender: sender)
         }
-    
+    }
 }
 
 extension ImageListViewController: UITableViewDelegate {
@@ -74,7 +71,6 @@ extension ImageListViewController: UITableViewDelegate {
         let photo = imagesListService.photos[indexPath.row]
         performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: photo)
     }
-
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == imagesListService.photos.count - 1, !imagesListService.isLoading {
@@ -131,11 +127,10 @@ extension ImageListViewController: UITableViewDataSource {
         tableView.insertRows(at: indexPaths, with: .automatic)
         tableView.endUpdates()
     }
-
-
-func imageListCellDidTapLike(_ cell: ImageListCell) {
+    
+    func imageListCellDidTapLike(_ cell: ImageListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
-    let photo = imagesListService.photos[indexPath.row]
+        let photo = imagesListService.photos[indexPath.row]
         
         UIBlockingProgressHUD.show()
         imagesListService.changeLike(photoId: photo.id, isLiked: !photo.isLiked) { result in

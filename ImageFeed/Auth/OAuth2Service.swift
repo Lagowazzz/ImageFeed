@@ -4,8 +4,6 @@ enum AuthServiceError: Error {
     case invalidRequest
 }
 
-import Foundation
-
 final class OAuth2Service {
     
     private let urlSession = URLSession.shared
