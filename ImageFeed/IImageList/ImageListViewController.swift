@@ -7,12 +7,6 @@ class ImageListViewController: UIViewController, ImageListCellDelegate {
     var photos: [Photo] = []
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     private let imagesListService = ImagesListService()
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
     private var didRegisterNotifications = false
     
     override func viewDidLoad() {
@@ -37,12 +31,8 @@ class ImageListViewController: UIViewController, ImageListCellDelegate {
     
     func configCell(for cell: ImageListCell, with indexPath: IndexPath) {
         let photo = imagesListService.photos[indexPath.row]
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ru_RU")
-        dateFormatter.dateFormat = "d MMMM yyyy"
-        cell.dateLabel.text = dateFormatter.string(from: photo.createdAt ?? Date())
-        
+        cell.dateLabel.text = DateFormatter.russian.string(from: photo.createdAt ?? Date())
+
         let isLiked = photo.isLiked
         let likeImage = isLiked ? UIImage(named: "Active") : UIImage(named: "NoActive")
         cell.likeButton.setImage(likeImage, for: .normal)
