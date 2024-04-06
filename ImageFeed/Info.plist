@@ -2,6 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFPlugInUnloadFunction</key>
+	<string></string>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Мы используем вашу фотографию для сохранения и отправки через приложение.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Мы используем вашу камеру для съемки фотографий и видео, чтобы вы могли делиться ими с друзьями.</string>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIImageName</key>
+		<string></string>
+	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

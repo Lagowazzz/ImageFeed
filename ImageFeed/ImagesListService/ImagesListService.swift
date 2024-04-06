@@ -7,49 +7,54 @@ final class ImagesListService {
     var isLoading = false
     
     func fetchPhotosNextPage() {
-        print("ImagesListService: Fetching next page...")
-        
-        guard !isLoading else { return }
-        
-        isLoading = true
-        let perPage = 10
-        let nextPage = (lastLoadedPage ?? 0) + 1
-        let accessKey = Constants.accessKey
-        let urlString = "https://api.unsplash.com/photos/?page=\(nextPage)&per_page=\(perPage)&client_id=\(accessKey)"
-        print("ImageListService: Fetching photos with URL: \(urlString)")
-        
-        guard let url = URL(string: urlString) else {
-            print("Invalid URL")
-            isLoading = false
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            guard let self = self, let data = data, error == nil else {
-                print("Error: \(error?.localizedDescription ?? "Unknown error")")
-                self?.isLoading = false
+            print("ImagesListService: Fetching next page...")
+            
+            guard !isLoading else { return }
+            
+            isLoading = true
+            let perPage = 10
+            let nextPage = (lastLoadedPage ?? 0) + 1
+            let accessKey = Constants.accessKey
+            let urlString = "https://api.unsplash.com/photos/?page=\(nextPage)&per_page=\(perPage)&client_id=\(accessKey)"
+            print("ImageListService: Fetching photos with URL: \(urlString)")
+            
+            guard let url = URL(string: urlString) else {
+                print("Invalid URL")
+                isLoading = false
                 return
             }
             
-            do {
-                let decoder = JSONDecoder()
-                let newPhotos = try decoder.decode([PhotoResult].self, from: data)
-                
-                DispatchQueue.main.async {
-                    self.photos.append(contentsOf: newPhotos.map { $0.toPhoto() })
-                    NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: nil)
-                    self.lastLoadedPage = nextPage
-                    self.isLoading = false
-                    print("Fetched \(newPhotos.count) new photos. Total photos: \(self.photos.count)")
+            let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+                guard let self = self, let data = data, error == nil else {
+                    print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                    self?.isLoading = false
+                    return
                 }
-            } catch {
-                print("Error decoding JSON: \(error)")
-                self.isLoading = false
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let newPhotosResult = try decoder.decode([PhotoResult].self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        for newPhotoResult in newPhotosResult {
+                            if !self.photos.contains(where: { $0.id == newPhotoResult.id }) {
+                                self.photos.append(newPhotoResult.toPhoto())
+                            }
+                        }
+                        
+                        NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: nil)
+                        self.lastLoadedPage = nextPage
+                        self.isLoading = false
+                        print("Fetched \(newPhotosResult.count) new photos. Total photos: \(self.photos.count)")
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                    self.isLoading = false
+                }
             }
+            
+            task.resume()
         }
-        
-        task.resume()
-    }
     
     func clearPhotos() {
         photos.removeAll()

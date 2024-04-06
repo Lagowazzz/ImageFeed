@@ -21,6 +21,7 @@
 		694652EF2B93C00500924C62 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694652EE2B93C00500924C62 /* AuthViewController.swift */; };
 		694652F12B93C04A00924C62 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694652F02B93C04A00924C62 /* WebViewViewController.swift */; };
 		694652F42B93D85900924C62 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694652F32B93D85900924C62 /* Constants.swift */; };
+		6948A1BA2BC13C9F0064B79A /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6948A1B92BC13C9F0064B79A /* Formatter.swift */; };
 		695B91512BBF034B002B101A /* ProfileLogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695B91502BBF034B002B101A /* ProfileLogoutService.swift */; };
 		696107602B6FF4C9005B2098 /* ImageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6961075F2B6FF4C9005B2098 /* ImageListCell.swift */; };
 		698A7AB92BA8C26F00EFAA75 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 698A7AB82BA8C26F00EFAA75 /* ProgressHUD */; };
@@ -54,6 +55,7 @@
 		694652EE2B93C00500924C62 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		694652F02B93C04A00924C62 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		694652F32B93D85900924C62 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6948A1B92BC13C9F0064B79A /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		695B91502BBF034B002B101A /* ProfileLogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutService.swift; sourceTree = "<group>"; };
 		6961075F2B6FF4C9005B2098 /* ImageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListCell.swift; sourceTree = "<group>"; };
 		699AF7732B7E8E7600C6B3CB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +181,14 @@
 			path = IImageList;
 			sourceTree = "<group>";
 		};
+		69B3C2672BC13C5D00D00B59 /* Formatter */ = {
+			isa = PBXGroup;
+			children = (
+				6948A1B92BC13C9F0064B79A /* Formatter.swift */,
+			);
+			path = Formatter;
+			sourceTree = "<group>";
+		};
 		69C3C83A2B6F044200E1EC3A = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +208,7 @@
 		69C3C8452B6F044200E1EC3A /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				69B3C2672BC13C5D00D00B59 /* Formatter */,
 				69EA7CFF2BBA2BE700B39F43 /* ImagesListService */,
 				694474BB2BB74FA900F2252E /* TabBar */,
 				694474B02BAF746700F2252E /* ProfileImageService */,
@@ -314,6 +325,7 @@
 				69C3C84B2B6F044200E1EC3A /* ImageListViewController.swift in Sources */,
 				694474AA2BAB169C00F2252E /* ProfileService.swift in Sources */,
 				6942B5C72B85DD0E00BACFBD /* ImageScrollView.swift in Sources */,
+				6948A1BA2BC13C9F0064B79A /* Formatter.swift in Sources */,
 				693D3F502B7FA23A0088EF12 /* SingleImageViewController.swift in Sources */,
 				696107602B6FF4C9005B2098 /* ImageListCell.swift in Sources */,
 				694474B42BAF755000F2252E /* UserResult.swift in Sources */,

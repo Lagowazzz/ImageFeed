@@ -23,8 +23,9 @@ final class SingleImageViewController: UIViewController {
             switch result {
             case .success(let imageResult):
                 self.imageScrollView.set(image: imageResult.image)
+                self.image = imageResult.image
             case .failure:
-                print("error")
+                self.showError()
             }
         }
         
@@ -43,6 +44,7 @@ final class SingleImageViewController: UIViewController {
         
         present(activityViewController, animated: true, completion: nil)
     }
+    
     @IBOutlet private weak var backButton: UIButton!
     
     @IBAction private func didTapBackButton(_ sender: UIButton) {
@@ -85,6 +87,7 @@ extension SingleImageViewController {
                 switch result {
                 case .success(let imageResult):
                     self.imageScrollView.set(image: imageResult.image)
+                    self.image = imageResult.image // Assign the loaded image to the 'image' property
                 case .failure:
                     self.showError()
                 }
@@ -99,4 +102,3 @@ extension SingleImageViewController {
         present(alertController, animated: true, completion: nil)
     }
 }
-

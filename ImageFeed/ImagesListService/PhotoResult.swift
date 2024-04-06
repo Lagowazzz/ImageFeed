@@ -1,4 +1,3 @@
-
 import Foundation
 
 struct PhotoResult: Codable {
@@ -25,11 +24,7 @@ struct PhotoResult: Codable {
 
 extension PhotoResult {
     func toPhoto() -> Photo {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
-        guard let date = dateFormatter.date(from: createdAt) else {
+        guard let date = DateFormatter.iso8601.date(from: createdAt) else {
             return Photo(
                 id: id,
                 size: CGSize(width: width, height: height),
