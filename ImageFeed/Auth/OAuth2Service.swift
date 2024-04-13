@@ -4,8 +4,6 @@ enum AuthServiceError: Error {
     case invalidRequest
 }
 
-import Foundation
-
 final class OAuth2Service {
     
     private let urlSession = URLSession.shared
@@ -16,7 +14,7 @@ final class OAuth2Service {
     static let shared = OAuth2Service()
     private let tokenStorage = OAuth2TokenStorage()
     private init() {}
-
+    
     func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard let baseURL = URL(string: "https://unsplash.com") else { fatalError("Invalid Base URL") }
         guard let url = URL(string: "/oauth/token" +
@@ -29,7 +27,7 @@ final class OAuth2Service {
         request.httpMethod = "POST"
         return request
     }
-
+    
     func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         lock.lock()
         defer { lock.unlock() }

@@ -10,6 +10,7 @@ final class ProfileViewController: UIViewController {
     private let button = UIButton()
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
+    private let profileLogoutService = ProfileLogoutService.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +49,7 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setupImageView() {
-        let profileImage = UIImage(named: "Photo")
+        let profileImage = UIImage(named: "Stub")
         imageView.image = profileImage
         imageView.tintColor = .gray
         imageView.layer.cornerRadius = 35
@@ -88,17 +89,12 @@ final class ProfileViewController: UIViewController {
         button.tintColor = .red
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
-        button.addTarget(self, action: #selector(deleteToken), for: .touchUpInside)
-    }
-    
-    @objc func deleteToken() {
-        let tokenStorage = OAuth2TokenStorage()
-        tokenStorage.token = nil
+        button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-
+            
             imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             imageView.widthAnchor.constraint(equalToConstant: 70),
@@ -122,6 +118,21 @@ final class ProfileViewController: UIViewController {
         label.text = profile?.name
         labelSecond.text = profile?.loginName
         labelThird.text = profile?.bio
+    }
+    
+    @objc private func showAlert() {
+        let alertController = UIAlertController(title: "Пока, пока!", message: "Уверены что хотите выйти?", preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: "Да", style: .destructive) { _ in
+            self.profileLogoutService.logout()
+        }
+        
+        let noAction = UIAlertAction(title: "Нет", style: .cancel, handler: nil)
+        
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
 
