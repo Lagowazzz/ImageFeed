@@ -18,6 +18,10 @@ final class AuthViewController: UIViewController, WebViewViewControllerDelegate 
             guard let webViewViewController = segue.destination as? WebViewViewController else {
                 fatalError("Failed to prepare for \(showWebViewSegueIdentifier)")
             }
+            let authHelper = AuthHelper()
+            let webViewPresenter = WebViewPresenter(authHelper: authHelper)
+            webViewViewController.presenter = webViewPresenter
+            webViewPresenter.view = webViewViewController
             webViewViewController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)
@@ -47,7 +51,6 @@ final class AuthViewController: UIViewController, WebViewViewControllerDelegate 
             }
         }
     }
-    
     
     private func switchToTabBarController() {
         DispatchQueue.main.async { [weak self] in
