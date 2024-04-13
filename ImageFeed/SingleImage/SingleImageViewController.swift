@@ -23,7 +23,6 @@ final class SingleImageViewController: UIViewController {
             switch result {
             case .success(let imageResult):
                 self.imageScrollView.set(image: imageResult.image)
-                self.image = imageResult.image
             case .failure:
                 self.showError()
             }
@@ -33,16 +32,28 @@ final class SingleImageViewController: UIViewController {
         view.bringSubviewToFront(sharingButton)
     }
     
-    var image: UIImage?
-    
     @IBOutlet private weak var sharingButton: UIButton!
     
     @IBAction private func didTapShareButton(_ sender: Any) {
-        guard let image = image else { return }
+        guard let image = imageView.image else { return }
         
-        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        
-        present(activityViewController, animated: true, completion: nil)
+        do {
+
+            let fileManager = FileManager.default
+            let tempDirectoryURL = fileManager.temporaryDirectory
+            let fileURL = tempDirectoryURL.appendingPathComponent("sharedImage.jpg")
+            
+            if let imageData = image.jpegData(compressionQuality: 1.0) {
+                try imageData.write(to: fileURL)
+                
+                let activityViewController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+                present(activityViewController, animated: true, completion: nil)
+            } else {
+                print("Failed to convert image to data")
+            }
+        } catch {
+            print("Error creating temporary file URL: \(error)")
+        }
     }
     
     @IBOutlet private weak var backButton: UIButton!
@@ -53,7 +64,7 @@ final class SingleImageViewController: UIViewController {
     
     private var imageScrollView: ImageScrollView!
     
-    @IBOutlet private  var imageView: UIImageView!
+    @IBOutlet private var imageView: UIImageView!
     
     private func setupImageScrollView() {
         imageScrollView = ImageScrollView(frame: view.bounds)
@@ -87,7 +98,6 @@ extension SingleImageViewController {
                 switch result {
                 case .success(let imageResult):
                     self.imageScrollView.set(image: imageResult.image)
-                    self.image = imageResult.image // Assign the loaded image to the 'image' property
                 case .failure:
                     self.showError()
                 }
