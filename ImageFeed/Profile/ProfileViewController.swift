@@ -1,8 +1,18 @@
+
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
-    
+import UIKit
+
+public protocol ProfileViewControllerProtocol: AnyObject {
+    func updateAvatar()
+    func updateProfileDetails(profile: Profile?)
+    var presenter: ProfileViewPresenterProtocol? {get set}
+}
+
+
+final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
+    var presenter: ProfileViewPresenterProtocol?
     private let imageView = UIImageView()
     private let label = UILabel()
     private let labelSecond = UILabel()
@@ -14,19 +24,16 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad()
+        presenter?.notificationObserver()
+        presenter = ProfileViewPresenter(view: self)
         setupUI()
         setupConstraints()
         updateProfileDetails(profile: profileService.profile)
-        profileImageServiceObserver = NotificationCenter.default
-            .addObserver(forName: ProfileImageService.didChangeNotification, object: nil,
-                         queue: .main) { [weak self] _ in
-                guard let self = self else { return }
-                self.updateAvatar()
-            }
         updateAvatar()
     }
     
-    private func updateAvatar() {
+    func updateAvatar() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             guard let profileImageURL = ProfileImageService.shared.avatarURL,
@@ -114,7 +121,7 @@ final class ProfileViewController: UIViewController {
         ])
     }
     
-    private func updateProfileDetails(profile: Profile?) {
+     func updateProfileDetails(profile: Profile?) {
         label.text = profile?.name
         labelSecond.text = profile?.loginName
         labelThird.text = profile?.bio
@@ -124,7 +131,7 @@ final class ProfileViewController: UIViewController {
         let alertController = UIAlertController(title: "Пока, пока!", message: "Уверены что хотите выйти?", preferredStyle: .alert)
         
         let yesAction = UIAlertAction(title: "Да", style: .destructive) { _ in
-            self.profileLogoutService.logout()
+            self.presenter?.logout()
         }
         
         let noAction = UIAlertAction(title: "Нет", style: .cancel, handler: nil)
@@ -135,4 +142,3 @@ final class ProfileViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 }
-

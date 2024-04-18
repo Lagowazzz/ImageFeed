@@ -10,10 +10,8 @@ final class WebViewTests: XCTestCase {
         let presenter = WebViewPresenterSpy()
         viewController.presenter = presenter
         presenter.view = viewController
-        
         //When
         _ = viewController.view
-        
         //Then
         XCTAssertTrue(presenter.viewDidLoadCalled)
     }
@@ -25,10 +23,8 @@ final class WebViewTests: XCTestCase {
         let presenter = WebViewPresenter(authHelper: authHelper)
         viewController.presenter = presenter
         presenter.view = viewController
-        
         //When
         presenter.viewDidLoad()
-        
         //Then
         XCTAssertTrue(viewController.loadRequestCalled)
     }
@@ -38,10 +34,8 @@ final class WebViewTests: XCTestCase {
         let authHelper = AuthHelper()
         let presenter = WebViewPresenter(authHelper: authHelper)
         let progress: Float = 0.6
-        
         //When
         let shouldHideProgress = presenter.shouldHideProgress(for: progress)
-        
         //Then
         XCTAssertFalse(shouldHideProgress)
     }
@@ -51,10 +45,8 @@ final class WebViewTests: XCTestCase {
         let authHelper = AuthHelper()
         let presenter = WebViewPresenter(authHelper: authHelper)
         let progress: Float = 1.0
-        
         //When
         let shouldHideProgress = presenter.shouldHideProgress(for: progress)
-        
         //Then
         XCTAssertTrue(shouldHideProgress)
     }
@@ -63,11 +55,9 @@ final class WebViewTests: XCTestCase {
         //Given
         let configuration = AuthConfiguration.standart
         let authHelper = AuthHelper(configuration: configuration)
-        
         //When
         let url = authHelper.authURL()
         let urlString = url?.absoluteString
-        
         //Then
         XCTAssertTrue(((urlString?.contains(configuration.authURLString)) != nil))
         XCTAssertTrue(((urlString?.contains(configuration.accessKey)) != nil))
@@ -82,10 +72,8 @@ final class WebViewTests: XCTestCase {
         urlComponents?.queryItems = [URLQueryItem(name: "code", value: "test code")]
         guard let url = urlComponents?.url else { return }
         let authHelper = AuthHelper()
-        
         //Then
         let code = authHelper.code(from: url)
-        
         //When
         XCTAssertEqual(code, "test code")
     }

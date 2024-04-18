@@ -22,8 +22,12 @@
 		694652F12B93C04A00924C62 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694652F02B93C04A00924C62 /* WebViewViewController.swift */; };
 		694652F42B93D85900924C62 /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694652F32B93D85900924C62 /* AuthConfiguration.swift */; };
 		6948A1BA2BC13C9F0064B79A /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6948A1B92BC13C9F0064B79A /* Formatter.swift */; };
+		695B31772BD0F3DA0003A340 /* ProfileViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695B31762BD0F3DA0003A340 /* ProfileViewPresenterSpy.swift */; };
+		695B31792BD0F5F90003A340 /* ProfileViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695B31782BD0F5F90003A340 /* ProfileViewControllerSpy.swift */; };
+		695B317B2BD0F79A0003A340 /* ProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695B317A2BD0F79A0003A340 /* ProfileViewTests.swift */; };
 		695B91512BBF034B002B101A /* ProfileLogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695B91502BBF034B002B101A /* ProfileLogoutService.swift */; };
 		696107602B6FF4C9005B2098 /* ImageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6961075F2B6FF4C9005B2098 /* ImageListCell.swift */; };
+		6973797F2BCEC9690043BF1A /* ProfileViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973797E2BCEC9690043BF1A /* ProfileViewPresenter.swift */; };
 		698A7AB92BA8C26F00EFAA75 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 698A7AB82BA8C26F00EFAA75 /* ProgressHUD */; };
 		698C4A902BCD510D007F235A /* WebViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C4A8F2BCD510D007F235A /* WebViewControllerSpy.swift */; };
 		699AF7742B7E8E7600C6B3CB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699AF7732B7E8E7600C6B3CB /* ProfileViewController.swift */; };
@@ -71,8 +75,12 @@
 		694652F02B93C04A00924C62 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		694652F32B93D85900924C62 /* AuthConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
 		6948A1B92BC13C9F0064B79A /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		695B31762BD0F3DA0003A340 /* ProfileViewPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewPresenterSpy.swift; sourceTree = "<group>"; };
+		695B31782BD0F5F90003A340 /* ProfileViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerSpy.swift; sourceTree = "<group>"; };
+		695B317A2BD0F79A0003A340 /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
 		695B91502BBF034B002B101A /* ProfileLogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutService.swift; sourceTree = "<group>"; };
 		6961075F2B6FF4C9005B2098 /* ImageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListCell.swift; sourceTree = "<group>"; };
+		6973797E2BCEC9690043BF1A /* ProfileViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewPresenter.swift; sourceTree = "<group>"; };
 		698C4A8F2BCD510D007F235A /* WebViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewControllerSpy.swift; sourceTree = "<group>"; };
 		699AF7732B7E8E7600C6B3CB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		69C3C8432B6F044200E1EC3A /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				699AF7732B7E8E7600C6B3CB /* ProfileViewController.swift */,
+				6973797E2BCEC9690043BF1A /* ProfileViewPresenter.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -268,6 +277,9 @@
 				69D3F8A82BCB2E010016D14D /* WebViewTests.swift */,
 				69D3F8AF2BCB315A0016D14D /* WebViewPresenterSpy.swift */,
 				698C4A8F2BCD510D007F235A /* WebViewControllerSpy.swift */,
+				695B31762BD0F3DA0003A340 /* ProfileViewPresenterSpy.swift */,
+				695B31782BD0F5F90003A340 /* ProfileViewControllerSpy.swift */,
+				695B317A2BD0F79A0003A340 /* ProfileViewTests.swift */,
 			);
 			path = ImageFeedTests;
 			sourceTree = "<group>";
@@ -395,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69C3C84B2B6F044200E1EC3A /* ImageListViewController.swift in Sources */,
+				6973797F2BCEC9690043BF1A /* ProfileViewPresenter.swift in Sources */,
 				694474AA2BAB169C00F2252E /* ProfileService.swift in Sources */,
 				69D3F89F2BCADC880016D14D /* WebViewPresenter.swift in Sources */,
 				6942B5C72B85DD0E00BACFBD /* ImageScrollView.swift in Sources */,
@@ -430,9 +443,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				695B31772BD0F3DA0003A340 /* ProfileViewPresenterSpy.swift in Sources */,
 				69D3F8A92BCB2E010016D14D /* WebViewTests.swift in Sources */,
 				698C4A902BCD510D007F235A /* WebViewControllerSpy.swift in Sources */,
 				69D3F8B02BCB315A0016D14D /* WebViewPresenterSpy.swift in Sources */,
+				695B317B2BD0F79A0003A340 /* ProfileViewTests.swift in Sources */,
+				695B31792BD0F5F90003A340 /* ProfileViewControllerSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
