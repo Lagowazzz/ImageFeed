@@ -1,7 +1,7 @@
 
 import Foundation
 
-protocol ImageListViewPresenterProtocol: AnyObject {
+ protocol ImageListViewPresenterProtocol: AnyObject {
     var view: ImageListViewControllerProtocol? {get set}
     var imagesListService: ImagesListService {get}
     func viewDidLoad()

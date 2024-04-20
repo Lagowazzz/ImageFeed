@@ -20,7 +20,7 @@ final class ProfileViewPresenter: ProfileViewPresenterProtocol {
     func notificationObserver() {
         profileImageServiceObserver = 
         NotificationCenter.default.addObserver(forName: ProfileImageService.didChangeNotification,
-        object: nil, queue: .main) { [weak self] _ in
+                                               object: nil, queue: .main) { [weak self] _ in
             self?.view?.updateAvatar()
         }
     }

@@ -1,8 +1,6 @@
-import ImageFeed
-import Foundation
+@testable import ImageFeed
 
 final class ProfileViewControllerSpy: ProfileViewControllerProtocol {
-    
     var presenter: ProfileViewPresenterProtocol?
 
     func updateAvatar() {
