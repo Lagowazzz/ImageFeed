@@ -92,6 +92,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         button.tintColor = .red
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
+        button.accessibilityIdentifier = "logout button"
         button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
     }
     

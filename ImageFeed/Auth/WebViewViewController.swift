@@ -7,6 +7,7 @@ public protocol WebViewViewControllerProtocol: AnyObject {
     func setProgressValue(_ newValue: Float)
     func setProgressHidden(_ isHidden: Bool)
 }
+
 protocol WebViewViewControllerDelegate: AnyObject {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
     func webViewViewControllerDidCancel(_ vc: WebViewViewController)
@@ -17,7 +18,6 @@ final class WebViewViewController: UIViewController, WKNavigationDelegate, WebVi
         webView.load(request)
     }
     
-    
     var presenter: WebViewPresenterProtocol?
     
     @IBAction func didTapBackButton(_ sender: Any) {
@@ -25,7 +25,6 @@ final class WebViewViewController: UIViewController, WKNavigationDelegate, WebVi
     }
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var webView: WKWebView!
-    
     weak var delegate: WebViewViewControllerDelegate?
     
     private var progressObservation: NSKeyValueObservation?
@@ -34,10 +33,10 @@ final class WebViewViewController: UIViewController, WKNavigationDelegate, WebVi
         super.viewDidLoad()
         presenter?.viewDidLoad()
         webView.navigationDelegate = self
-        
+        webView.accessibilityIdentifier = "UnsplashWebView"
+
         progressObservation = webView.observe(\.estimatedProgress, options: .new) { [weak self] webView, _ in
             self?.presenter?.didUpdateProgressValue(webView.estimatedProgress)
-
         }
     }
     
@@ -64,6 +63,4 @@ final class WebViewViewController: UIViewController, WKNavigationDelegate, WebVi
             decisionHandler(.allow)
         }
     }
-    
- 
 }

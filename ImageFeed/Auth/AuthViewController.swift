@@ -13,6 +13,11 @@ final class AuthViewController: UIViewController, WebViewViewControllerDelegate 
     private let oauth2Service = OAuth2Service.shared
     private let showWebViewSegueIdentifier = "ShowWebView"
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        enterButton.accessibilityIdentifier = "Authenticate"
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showWebViewSegueIdentifier {
             guard let webViewViewController = segue.destination as? WebViewViewController else {
