@@ -64,10 +64,6 @@ final class ImageFeedUITests: XCTestCase {
         let navBackButtonWhiteButton = app.buttons["nav back button white"]
         navBackButtonWhiteButton.tap()
     }
-
-
-
-
     
     func testProfile() throws {
         app.tabBars.buttons.element(boundBy: 1).tap()
