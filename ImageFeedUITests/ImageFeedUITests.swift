@@ -2,10 +2,10 @@ import XCTest
 
 final class ImageFeedUITests: XCTestCase {
     private let app = XCUIApplication()
-    let yourEmail = "Lagowazzz@mail.ru"
-    let yourPassword = "Praktikum12345"
-    let yourFullName = "Ilya Lyashenko"
-    let yourUserName = "@lagowazzz"
+    let yourEmail = ""
+    let yourPassword = ""
+    let yourFullName = ""
+    let yourUserName = ""
     
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -41,7 +41,7 @@ final class ImageFeedUITests: XCTestCase {
         let tablesQuery = app.tables
         
         let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
-        cell.swipeUp()
+        app.swipeUp()
         
         sleep(2)
         
