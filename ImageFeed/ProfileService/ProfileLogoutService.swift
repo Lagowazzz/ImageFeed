@@ -3,7 +3,7 @@ import WebKit
 
 final class ProfileLogoutService {
     static let shared = ProfileLogoutService()
-    
+    private let imagesListService = ImagesListService.shared
     private init() { }
     
     @objc func logout() {
@@ -44,7 +44,7 @@ final class ProfileLogoutService {
     
     private func cleanImageData() {
         ProfileImageService.shared.fetchProfileImageURL(username: "") { _ in }
-        ImagesListService().clearPhotos()
+        imagesListService.clearPhotos()
     }
     
     @objc func deleteToken() {

@@ -44,6 +44,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     }
     
     private func setupUI() {
+        view.backgroundColor = UIColor(red: 26/255, green: 27/255, blue: 34/255, alpha: 1.0)
         setupImageView()
         setupLabel()
         setupSecondLabel()
@@ -89,7 +90,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         let buttonImage = UIImage(systemName: "ipad.and.arrow.forward")
         guard let buttonImage = buttonImage else { return }
         button.setImage(buttonImage, for: .normal)
-        button.tintColor = .red
+        button.tintColor = UIColor(red: 245/255, green: 107/255, blue: 108/255, alpha: 1.0)
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
         button.accessibilityIdentifier = "logout button"

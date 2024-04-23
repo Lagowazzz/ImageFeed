@@ -1,5 +1,4 @@
-import UIKit
-import WebKit
+import Foundation
 
 public protocol WebViewPresenterProtocol {
     

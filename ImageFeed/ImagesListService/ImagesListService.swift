@@ -4,7 +4,7 @@ final class ImagesListService {
     static let shared = ImagesListService()
 
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
-     init(){}
+    private init(){}
 
     private (set) var photos: [Photo] = []
     private var lastLoadedPage: Int?

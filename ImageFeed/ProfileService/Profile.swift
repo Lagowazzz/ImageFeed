@@ -10,8 +10,8 @@ public struct Profile {
     init(from profileResult: ProfileResult) {
         username = profileResult.username
         let firstName = profileResult.firstName
-        let lastName = profileResult.lastName
-        name = "\(firstName) \(lastName)"
+        let lastName = profileResult.lastName ?? ""
+        name = lastName.isEmpty ? firstName : "\(firstName) \(lastName)"
         loginName = "@\(profileResult.username)"
         bio = profileResult.bio
     }

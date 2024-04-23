@@ -40,7 +40,7 @@ final class ImageFeedUITests: XCTestCase {
     func testFeed() throws {
         let tablesQuery = app.tables
         
-        let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
+        _ = tablesQuery.children(matching: .cell).element(boundBy: 0)
         app.swipeUp()
         
         sleep(2)

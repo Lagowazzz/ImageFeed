@@ -23,16 +23,6 @@ final class ImageListViewPresenter: ImageListViewPresenterProtocol {
         imagesListService.fetchPhotosNextPage()
     }
     
-    private func addObserver() {
-        NotificationCenter.default.addObserver(
-            forName: ImagesListService.didChangeNotification,
-            object: nil,
-            queue: nil
-        ) { [weak self] _ in
-            self?.view?.updateTableViewAnimated()
-        }
-    }
-    
     func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
         imagesListService.changeLike(photoId: photoId, isLiked: isLike, {[weak self] result in
             guard self != nil else { return }
@@ -44,5 +34,15 @@ final class ImageListViewPresenter: ImageListViewPresenterProtocol {
                 print(error.localizedDescription)
             }
         })
+    }
+    
+    private func addObserver() {
+        NotificationCenter.default.addObserver(
+            forName: ImagesListService.didChangeNotification,
+            object: nil,
+            queue: nil
+        ) { [weak self] _ in
+            self?.view?.updateTableViewAnimated()
+        }
     }
 }
