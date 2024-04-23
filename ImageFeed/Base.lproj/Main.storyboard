@@ -46,6 +46,7 @@
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TpH-0a-3g0" userLabel="Like Button">
                                                     <rect key="frame" x="333" y="4" width="44" height="44"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="Like"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="44" id="aAf-Dv-N7y"/>
                                                         <constraint firstAttribute="height" constant="44" id="ezD-gb-cyd"/>
@@ -83,6 +84,9 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="Cell">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <connections>
                                             <outlet property="dateLabel" destination="bzN-Ye-dEG" id="rgd-PV-gk6"/>
                                             <outlet property="imageViewCell" destination="18D-E3-HFM" id="eom-LJ-T03"/>
@@ -125,6 +129,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Afo-jx-f2H" userLabel="Back Button">
                                 <rect key="frame" x="9" y="55" width="24" height="24"/>
+                                <accessibility key="accessibilityConfiguration" identifier="nav back button white"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="O2M-XC-1WQ"/>
                                     <constraint firstAttribute="height" constant="24" id="Wv1-Ab-Y9q"/>
@@ -260,7 +265,7 @@
         <!--Web View View Controller-->
         <scene sceneID="PcC-XG-RVB">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="We8-Nb-ROC" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewViewController" modalPresentationStyle="fullScreen" id="We8-Nb-ROC" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p0h-Ro-Fuq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

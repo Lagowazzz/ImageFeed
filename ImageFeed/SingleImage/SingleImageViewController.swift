@@ -8,6 +8,7 @@ final class SingleImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImageScrollView()
+        setupSwipeGesture()
         
         guard let photo = photo, let fullImageUrl = URL(string: photo.largeImageURL) else {
             return
@@ -38,7 +39,7 @@ final class SingleImageViewController: UIViewController {
         guard let image = imageView.image else { return }
         
         do {
-
+            
             let fileManager = FileManager.default
             let tempDirectoryURL = fileManager.temporaryDirectory
             let fileURL = tempDirectoryURL.appendingPathComponent("sharedImage.jpg")
@@ -59,7 +60,12 @@ final class SingleImageViewController: UIViewController {
     @IBOutlet private weak var backButton: UIButton!
     
     @IBAction private func didTapBackButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        UIView.animate(withDuration: 0.1, animations: {
+            self.imageScrollView.transform = CGAffineTransform(translationX: self.view.bounds.width, y: 0)
+            self.view.transform = CGAffineTransform(translationX: self.view.bounds.width, y: 0)
+        }) { _ in
+            self.dismiss(animated: false, completion: nil)
+        }
     }
     
     private var imageScrollView: ImageScrollView!
@@ -110,5 +116,19 @@ extension SingleImageViewController {
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension SingleImageViewController {
+    func setupSwipeGesture() {
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeRight(_:)))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
+    }
+    
+    @objc func didSwipeRight(_ gesture: UISwipeGestureRecognizer) {
+        if gesture.state == .ended {
+            didTapBackButton(backButton)
+        }
     }
 }

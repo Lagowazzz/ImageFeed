@@ -3,7 +3,7 @@ import WebKit
 
 final class ProfileLogoutService {
     static let shared = ProfileLogoutService()
-    
+    private let imagesListService = ImagesListService.shared
     private init() { }
     
     @objc func logout() {
@@ -12,7 +12,7 @@ final class ProfileLogoutService {
         navigateToInitialScreen()
     }
     
-    private func cleanCookies() {
+     func cleanCookies() {
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
         WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
             records.forEach { record in
@@ -21,7 +21,7 @@ final class ProfileLogoutService {
         }
     }
     
-    private func navigateToInitialScreen() {
+     func navigateToInitialScreen() {
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
             return
         }
@@ -32,7 +32,7 @@ final class ProfileLogoutService {
         window.makeKeyAndVisible()
     }
     
-    private func cleanData() {
+     func cleanData() {
         cleanProfileData()
         cleanImageData()
         deleteToken()
@@ -44,7 +44,7 @@ final class ProfileLogoutService {
     
     private func cleanImageData() {
         ProfileImageService.shared.fetchProfileImageURL(username: "") { _ in }
-        ImagesListService().clearPhotos()
+        imagesListService.clearPhotos()
     }
     
     @objc func deleteToken() {

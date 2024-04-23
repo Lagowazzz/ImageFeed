@@ -16,40 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ProgressHUD.mediaSize = 50
         ProgressHUD.marginSize = 0
         
-        // Request photo library authorization
-        PHPhotoLibrary.requestAuthorization { status in
-            switch status {
-            case .authorized:
-                print("Access to photo library granted")
-            case .denied, .restricted:
-                print("Access to photo library denied")
-            case .notDetermined:
-                print("Access to photo library not determined")
-            case .limited:
-                print("some code")
-            @unknown default:
-                print("Unexpected status")
-            }
-        }
-        
-        // Request camera authorization
-        AVCaptureDevice.requestAccess(for: .video) { granted in
-            if granted {
-                print("Access to camera granted")
-            } else {
-                print("Access to camera denied")
-            }
-        }
-        
-        // Request activity sharing authorization
-        let activityViewController = UIActivityViewController(activityItems: [], applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = { activityType, completed, returnedItems, activityError in
-            if completed {
-                print("Activity sharing completed")
-            } else {
-                print("Activity sharing canceled")
-            }
-        }
+     
+     
         
         return true
     }

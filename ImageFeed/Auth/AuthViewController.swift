@@ -13,11 +13,20 @@ final class AuthViewController: UIViewController, WebViewViewControllerDelegate 
     private let oauth2Service = OAuth2Service.shared
     private let showWebViewSegueIdentifier = "ShowWebView"
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        enterButton.accessibilityIdentifier = "Authenticate"
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showWebViewSegueIdentifier {
             guard let webViewViewController = segue.destination as? WebViewViewController else {
                 fatalError("Failed to prepare for \(showWebViewSegueIdentifier)")
             }
+            let authHelper = AuthHelper()
+            let webViewPresenter = WebViewPresenter(authHelper: authHelper)
+            webViewViewController.presenter = webViewPresenter
+            webViewPresenter.view = webViewViewController
             webViewViewController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)
@@ -47,7 +56,6 @@ final class AuthViewController: UIViewController, WebViewViewControllerDelegate 
             }
         }
     }
-    
     
     private func switchToTabBarController() {
         DispatchQueue.main.async { [weak self] in

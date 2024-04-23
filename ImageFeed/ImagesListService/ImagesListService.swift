@@ -1,7 +1,11 @@
 import UIKit
 
 final class ImagesListService {
+    static let shared = ImagesListService()
+
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
+    private init(){}
+
     private (set) var photos: [Photo] = []
     private var lastLoadedPage: Int?
     var isLoading = false
