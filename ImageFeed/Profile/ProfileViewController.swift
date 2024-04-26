@@ -17,6 +17,10 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     private let profileLogoutService = ProfileLogoutService.shared
+    private let noPhoto = UIImageView()
+    private let favorites = UILabel()
+    private let notification = UILabel()
+    private let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +54,9 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         setupSecondLabel()
         setupThirdLabel()
         setupButton()
+        setupNoPhoto()
+        setupFavorites()
+        setupNotification()
     }
     
     private func setupImageView() {
@@ -60,6 +67,38 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
+    }
+    
+    private func setupNoPhoto() {
+        let noPhotoImage = UIImage(named: "NoPhoto")
+        noPhoto.image = noPhotoImage
+        noPhoto.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(noPhoto)
+    }
+    
+    private func setupFavorites() {
+        favorites.text = "Избранное"
+        favorites.textColor = .white
+        favorites.font = .boldSystemFont(ofSize: 23)
+        favorites.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(favorites)
+    }
+    
+    private func setupNotification() {
+        notification.text = "27"
+        notification.textColor = .white
+        notification.backgroundColor = UIColor(red: 55/255, green: 114/255, blue: 231/255, alpha: 1.0)
+        notification.font = .boldSystemFont(ofSize: 13)
+        notification.layer.cornerRadius = 13
+        notification.clipsToBounds = true
+        notification.textAlignment = .center
+        notification.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(notification)
+    }
+    
+    private func setupTableView() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
     }
     
     private func setupLabel() {
@@ -115,9 +154,26 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
             labelThird.topAnchor.constraint(equalTo: labelSecond.bottomAnchor, constant: 8),
             
             button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
-            button.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
+            button.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
+            
+            noPhoto.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 130),
+            noPhoto.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 376),
+            noPhoto.widthAnchor.constraint(equalToConstant: 115),
+            noPhoto.heightAnchor.constraint(equalToConstant: 115),
+            
+            favorites.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            favorites.topAnchor.constraint(equalTo: labelThird.bottomAnchor, constant: 22),
+            
+            notification.leadingAnchor.constraint(equalTo: favorites.trailingAnchor, constant: 10),
+            notification.topAnchor.constraint(equalTo: labelThird.bottomAnchor, constant: 22),
+            
+            notification.widthAnchor.constraint(greaterThanOrEqualToConstant: 40),
+            notification.heightAnchor.constraint(equalToConstant: 26),
+            
+            
         ])
     }
+
     
     func updateProfileDetails(profile: Profile?) {
         label.text = profile?.name
