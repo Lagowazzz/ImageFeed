@@ -1,19 +1,27 @@
 import Kingfisher
 import UIKit
 
+protocol SingleImageViewControllerDelegate: AnyObject {
+    func singleImageViewControllerDidTapLike(_ viewController: SingleImageViewController)
+}
+
 final class SingleImageViewController: UIViewController {
-    
+
     var photo: Photo?
+    var isLiked: Bool = false
+    weak var delegate: SingleImageViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImageScrollView()
         setupSwipeGesture()
-        
+       
+        let likeImage = isLiked ? UIImage(named: "Active") : UIImage(named: "NoActive")
+        likeButton.setImage(likeImage, for: .normal)
+
         guard let photo = photo, let fullImageUrl = URL(string: photo.largeImageURL) else {
             return
         }
-        print("Image size: \(photo.size)")
         
         imageView.kf.indicatorType = .activity
         UIBlockingProgressHUD.show()
@@ -31,9 +39,24 @@ final class SingleImageViewController: UIViewController {
         
         view.bringSubviewToFront(backButton)
         view.bringSubviewToFront(sharingButton)
+        view.bringSubviewToFront(backGroundButton)
+        view.bringSubviewToFront(likeButton)
     }
     
     @IBOutlet private weak var sharingButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
+    
+    @IBAction private func didTapLikeButton(_ sender: Any) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.isLiked.toggle()
+            let imageName = self.isLiked ? "Active" : "NoActive"
+            self.likeButton.setImage(UIImage(named: imageName), for: .normal)
+            self.delegate?.singleImageViewControllerDidTapLike(self)
+        }
+    }
+
+    @IBOutlet weak var backGroundButton: UIImageView!
     
     @IBAction private func didTapShareButton(_ sender: Any) {
         guard let image = imageView.image else { return }
@@ -60,7 +83,7 @@ final class SingleImageViewController: UIViewController {
     @IBOutlet private weak var backButton: UIButton!
     
     @IBAction private func didTapBackButton(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.1, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.imageScrollView.transform = CGAffineTransform(translationX: self.view.bounds.width, y: 0)
             self.view.transform = CGAffineTransform(translationX: self.view.bounds.width, y: 0)
         }) { _ in
@@ -68,9 +91,9 @@ final class SingleImageViewController: UIViewController {
         }
     }
     
-    private var imageScrollView: ImageScrollView!
+    private  var imageScrollView: ImageScrollView!
     
-    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
     
     private func setupImageScrollView() {
         imageScrollView = ImageScrollView(frame: view.bounds)
@@ -84,9 +107,14 @@ final class SingleImageViewController: UIViewController {
             imageScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
     }
+    
+    deinit {
+            imageView.kf.cancelDownloadTask()
+        }
 }
 
 extension SingleImageViewController {
+    
     func showError() {
         let alertController = UIAlertController(title: "Что-то пошло не так", message: "Попробовать ещё раз?", preferredStyle: .alert)
         
@@ -120,6 +148,7 @@ extension SingleImageViewController {
 }
 
 extension SingleImageViewController {
+    
     func setupSwipeGesture() {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeRight(_:)))
         swipeRightGesture.direction = .right
@@ -132,3 +161,4 @@ extension SingleImageViewController {
         }
     }
 }
+

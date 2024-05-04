@@ -122,7 +122,7 @@
         <!--Single Image View Controller-->
         <scene sceneID="Nuf-U4-Mqf">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="zsE-Qg-dgU" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SingleImageViewController" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zsE-Qg-dgU" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Dm-2q-NZl">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -152,11 +152,11 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="Fo4-VP-Yiu"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA6-nr-E8z">
-                                <rect key="frame" x="171" y="752" width="50" height="50"/>
+                                <rect key="frame" x="274" y="751" width="51" height="51"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="CVt-xb-h64"/>
-                                    <constraint firstAttribute="height" constant="50" id="KCs-1f-odg"/>
+                                    <constraint firstAttribute="width" constant="51" id="CVt-xb-h64"/>
+                                    <constraint firstAttribute="height" constant="51" id="KCs-1f-odg"/>
                                 </constraints>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -165,21 +165,55 @@
                                     <action selector="didTapShareButton:" destination="zsE-Qg-dgU" eventType="touchUpInside" id="ae1-Fc-yVL"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ellipse 1" translatesAutoresizingMaskIntoConstraints="NO" id="0zJ-n3-m1C">
+                                <rect key="frame" x="68" y="751" width="51" height="51"/>
+                                <color key="backgroundColor" red="0.1019607843" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="hPK-xa-MP6"/>
+                                    <constraint firstAttribute="width" constant="51" id="qwM-hX-rbq"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNh-yt-E2i" userLabel="LikeButton">
+                                <rect key="frame" x="78.666666666666671" y="763.66666666666663" width="30" height="26"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Active"/>
+                                <connections>
+                                    <action selector="didTapLikeButton:" destination="zsE-Qg-dgU" eventType="touchUpInside" id="B04-PJ-Ucy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wu5-w9-5sG"/>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="wu5-w9-5sG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Afo-jx-f2H" secondAttribute="trailing" symbolic="YES" id="4dp-CK-rZb"/>
                             <constraint firstAttribute="bottom" secondItem="AA6-nr-E8z" secondAttribute="bottom" constant="50" id="DPz-gB-Kdh"/>
-                            <constraint firstItem="wu5-w9-5sG" firstAttribute="trailing" secondItem="AA6-nr-E8z" secondAttribute="trailing" constant="172" id="HXJ-Ji-JC8"/>
+                            <constraint firstItem="wu5-w9-5sG" firstAttribute="trailing" secondItem="AA6-nr-E8z" secondAttribute="trailing" constant="68" id="HXJ-Ji-JC8"/>
+                            <constraint firstAttribute="bottom" secondItem="0zJ-n3-m1C" secondAttribute="bottom" constant="50" id="HoG-5g-tcw"/>
+                            <constraint firstItem="xNh-yt-E2i" firstAttribute="centerX" secondItem="0zJ-n3-m1C" secondAttribute="centerX" id="UIY-OM-lMy"/>
                             <constraint firstItem="Afo-jx-f2H" firstAttribute="leading" secondItem="6Dm-2q-NZl" secondAttribute="leading" constant="9" id="Vyo-fh-1j9"/>
+                            <constraint firstItem="0zJ-n3-m1C" firstAttribute="leading" secondItem="wu5-w9-5sG" secondAttribute="leading" constant="68" id="cym-NN-Gai"/>
                             <constraint firstItem="Afo-jx-f2H" firstAttribute="top" secondItem="6Dm-2q-NZl" secondAttribute="top" constant="55" id="f6h-Gx-wWz"/>
-                            <constraint firstItem="AA6-nr-E8z" firstAttribute="leading" secondItem="wu5-w9-5sG" secondAttribute="leading" constant="171" id="kjz-sI-Ibc"/>
+                            <constraint firstItem="xNh-yt-E2i" firstAttribute="centerY" secondItem="0zJ-n3-m1C" secondAttribute="centerY" id="xa4-TZ-Fgd"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="25"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="Afo-jx-f2H" id="PhH-eO-lCj"/>
+                        <outlet property="backGroundButton" destination="0zJ-n3-m1C" id="siX-Vc-ndh"/>
                         <outlet property="imageView" destination="RpA-RM-XMY" id="J6r-aL-Chs"/>
+                        <outlet property="likeButton" destination="xNh-yt-E2i" id="mO4-VQ-JWO"/>
                         <outlet property="sharingButton" destination="AA6-nr-E8z" id="6vE-fB-X9S"/>
                     </connections>
                 </viewController>
@@ -322,7 +356,9 @@
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
+        <image name="Active" width="30" height="26"/>
         <image name="Backward" width="24" height="24"/>
+        <image name="Ellipse 1" width="50" height="50"/>
         <image name="Logo_of_Unsplash" width="60" height="60"/>
         <image name="NoActive" width="42" height="42"/>
         <image name="Sharing" width="51" height="51"/>

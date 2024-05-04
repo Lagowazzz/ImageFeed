@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6911A2302BE14F1B009E3896 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6911A22F2BE14F1B009E3896 /* CustomTableViewCell.swift */; };
+		6911A2322BE16CDE009E3896 /* LikedPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6911A2312BE16CDE009E3896 /* LikedPhoto.swift */; };
+		6911A2342BE18C73009E3896 /* LikedPhotosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6911A2332BE18C73009E3896 /* LikedPhotosService.swift */; };
 		6936767B2BD3C52400B40E61 /* imageListViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6936767A2BD3C52400B40E61 /* imageListViewPresenter.swift */; };
 		693676802BD3EE5000B40E61 /* ImageListViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6936767F2BD3EE5000B40E61 /* ImageListViewPresenterSpy.swift */; };
 		693676822BD3F15E00B40E61 /* ImageListViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693676812BD3F15E00B40E61 /* ImageListViewControllerSpy.swift */; };
@@ -75,6 +78,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6911A22F2BE14F1B009E3896 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		6911A2312BE16CDE009E3896 /* LikedPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedPhoto.swift; sourceTree = "<group>"; };
+		6911A2332BE18C73009E3896 /* LikedPhotosService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedPhotosService.swift; sourceTree = "<group>"; };
 		6936767A2BD3C52400B40E61 /* imageListViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageListViewPresenter.swift; sourceTree = "<group>"; };
 		6936767F2BD3EE5000B40E61 /* ImageListViewPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewPresenterSpy.swift; sourceTree = "<group>"; };
 		693676812BD3F15E00B40E61 /* ImageListViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewControllerSpy.swift; sourceTree = "<group>"; };
@@ -273,6 +279,9 @@
 			children = (
 				699AF7732B7E8E7600C6B3CB /* ProfileViewController.swift */,
 				6973797E2BCEC9690043BF1A /* ProfileViewPresenter.swift */,
+				6911A22F2BE14F1B009E3896 /* CustomTableViewCell.swift */,
+				6911A2312BE16CDE009E3896 /* LikedPhoto.swift */,
+				6911A2332BE18C73009E3896 /* LikedPhotosService.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -517,8 +526,10 @@
 				69D3F89F2BCADC880016D14D /* WebViewPresenter.swift in Sources */,
 				6942B5C72B85DD0E00BACFBD /* ImageScrollView.swift in Sources */,
 				6948A1BA2BC13C9F0064B79A /* Formatter.swift in Sources */,
+				6911A2342BE18C73009E3896 /* LikedPhotosService.swift in Sources */,
 				693D3F502B7FA23A0088EF12 /* SingleImageViewController.swift in Sources */,
 				696107602B6FF4C9005B2098 /* ImageListCell.swift in Sources */,
+				6911A2322BE16CDE009E3896 /* LikedPhoto.swift in Sources */,
 				694474B42BAF755000F2252E /* UserResult.swift in Sources */,
 				69D54E682B9F55D100743287 /* URLSession+Data.swift in Sources */,
 				69EA7D012BBA2C0A00B39F43 /* ImagesListService.swift in Sources */,
@@ -529,6 +540,7 @@
 				69D3F8A12BCAF9830016D14D /* AuthHelper.swift in Sources */,
 				69D54E662B9E0C4300743287 /* OAuth2Service.swift in Sources */,
 				694474B22BAF748900F2252E /* ProfileImageService.swift in Sources */,
+				6911A2302BE14F1B009E3896 /* CustomTableViewCell.swift in Sources */,
 				694474A72BAAFDA900F2252E /* UIBlockingProgressHUD.swift in Sources */,
 				695B91512BBF034B002B101A /* ProfileLogoutService.swift in Sources */,
 				694652F42B93D85900924C62 /* AuthConfiguration.swift in Sources */,

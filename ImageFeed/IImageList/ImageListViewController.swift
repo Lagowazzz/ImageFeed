@@ -7,16 +7,17 @@ protocol ImageListViewControllerProtocol: AnyObject {
     var photos: [Photo] {get set}
 }
 
-final class ImageListViewController: UIViewController, ImageListCellDelegate, ImageListViewControllerProtocol  {
+final class ImageListViewController: UIViewController, ImageListCellDelegate, ImageListViewControllerProtocol, SingleImageViewControllerDelegate  {
+    
     var presenter: ImageListViewPresenterProtocol? = {
         return ImageListViewPresenter()
     } ()
     var photos: [Photo] = []
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     private let imagesListService = ImagesListService.shared
-    
     @IBOutlet private var tableView: UITableView!
-    
+    var selectedIndexPath: IndexPath?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
@@ -33,7 +34,8 @@ final class ImageListViewController: UIViewController, ImageListCellDelegate, Im
         let isLiked = photo.isLiked
         let likeImage = isLiked ? UIImage(named: "Active") : UIImage(named: "NoActive")
         cell.likeButton.setImage(likeImage, for: .normal)
-        
+        cell.likeButton.tag = indexPath.row
+
         cell.imageViewCell.kf.indicatorType = .activity
         
         if let regularnailURL = URL(string: photo.regularImageURL) {
@@ -51,6 +53,9 @@ final class ImageListViewController: UIViewController, ImageListCellDelegate, Im
                 return
             }
             viewController.photo = photo
+            viewController.isLiked = photo.isLiked
+            viewController.delegate = self
+
         } else {
             super.prepare(for: segue, sender: sender)
         }
@@ -58,7 +63,9 @@ final class ImageListViewController: UIViewController, ImageListCellDelegate, Im
 }
 
 extension ImageListViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndexPath = indexPath
         let photo = imagesListService.photos[indexPath.row]
         performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: photo)
     }
@@ -86,6 +93,7 @@ extension ImageListViewController: UITableViewDataSource {
     }
     
     private func addGradient(to cell: UITableViewCell) {
+        
         cell.contentView.layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
         
         let gradientLayer = CAGradientLayer()
@@ -139,11 +147,18 @@ extension ImageListViewController: UITableViewDataSource {
     }
     
     private func presentErrorAlert() {
+        
         let alertController = UIAlertController(title: "Что-то пошло не так(", message: "", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ок", style: .default, handler: nil)
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
     }
+    
+    func singleImageViewControllerDidTapLike(_ viewController: SingleImageViewController) {
+        guard let selectedIndexPath = selectedIndexPath,
+              let cell = tableView.cellForRow(at: selectedIndexPath) as? ImageListCell else {
+            return
+        }
+        imageListCellDidTapLike(cell)
+    }
 }
-
-
